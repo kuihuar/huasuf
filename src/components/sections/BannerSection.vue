@@ -67,10 +67,18 @@
       <a class="arrs arr_prev" @click="prevNotice"></a>
       <a class="arrs arr_next" @click="nextNotice"></a>
     </div>
+
+    <!-- 加载状态 -->
+    <div v-if="loading" class="loading-overlay">
+      <div class="loading-spinner"></div>
+    </div>
   </div>
 </template>
 
 <script>
+import { getCarouselList } from '@/api/carousel.js'
+import { getLatestNotices } from '@/api/notice.js'
+
 export default {
   name: 'BannerSection',
   data() {
@@ -85,7 +93,108 @@ export default {
       currentNoticeIndex: 0,
       noticeAutoScrollTimer: null,
       noticeScrollInterval: 5000, // 5秒切换一次公告
-      bannerSlides: [
+      // 从接口获取的数据
+      bannerSlides: [],
+      notices: [],
+      // 加载状态
+      loading: true,
+      error: null
+    }
+  },
+  async mounted() {
+    await this.loadData()
+    this.startAutoSlide()
+    this.startNoticeAutoScroll()
+  },
+  beforeUnmount() {
+    this.clearTimers()
+    this.clearNoticeTimer()
+  },
+  methods: {
+    // 加载数据
+    async loadData() {
+      try {
+        this.loading = true
+        this.error = null
+        
+        // 并行加载轮播图和公告数据
+        const [carouselResponse, noticeResponse] = await Promise.all([
+          this.loadCarouselData(),
+          this.loadNoticeData()
+        ])
+        
+        this.bannerSlides = carouselResponse
+        this.notices = noticeResponse
+        
+        // 如果数据为空，使用默认数据
+        if (this.bannerSlides.length === 0) {
+          this.bannerSlides = this.getDefaultBannerSlides()
+        }
+        if (this.notices.length === 0) {
+          this.notices = this.getDefaultNotices()
+        }
+        
+      } catch (error) {
+        console.error('加载数据失败:', error)
+        this.error = error.message || '数据加载失败'
+        // 使用默认数据
+        this.bannerSlides = this.getDefaultBannerSlides()
+        this.notices = this.getDefaultNotices()
+      } finally {
+        this.loading = false
+      }
+    },
+    
+    // 加载轮播图数据
+    async loadCarouselData() {
+      try {
+        const response = await getCarouselList()
+        console.log(response)
+        console.log(response.data, "XXXXX")
+        // 根据实际API返回结构调整
+        if (response && response.data) {
+          return response.data.map(item => ({
+            image: baseURL + item.image || item.imageUrl,
+            title: item.title || item.name,
+            link: item.link || item.url || '#'
+          }))
+        }
+        return []
+      } catch (error) {
+        console.error('加载轮播图数据失败:', error)
+        return []
+      }
+    },
+    
+    // 加载公告数据
+    async loadNoticeData() {
+      try {
+        const response = await getLatestNotices(5)
+        // 根据实际API返回结构调整
+        if (response && response.data) {
+          return response.data.map(item => ({
+            title: item.title || item.name,
+            date: this.formatDate(item.date || item.createdAt || item.publishTime),
+            link: item.link || item.url || '#'
+          }))
+        }
+        return []
+      } catch (error) {
+        console.error('加载公告数据失败:', error)
+        return []
+      }
+    },
+    
+    // 格式化日期
+    formatDate(dateString) {
+      if (!dateString) return ''
+      const date = new Date(dateString)
+      return date.toISOString().split('T')[0]
+    },
+    
+    // 默认轮播图数据（作为fallback）
+    getDefaultBannerSlides() {
+      return [
         {
           image: '/src/assets/images/baner_hsjs.jpg',
           title: '华苏建设有限公司',
@@ -106,15 +215,19 @@ export default {
           title: '学习宣传',
           link: '#'
         }
-      ],
-      notices: [
+      ]
+    },
+    
+    // 默认公告数据（作为fallback）
+    getDefaultNotices() {
+      return [
         {
-          title: '华苏建设有限公司企业负责人2023年度薪酬情况',
+          title: '华苏建设有限公司企业负责人202业绩',
           date: '2025-07-09',
           link: '#'
         },
         {
-          title: '省属企业2023年度工资分配信息披露表',
+          title: '华苏建设有限公司2025年度工资分配信息披露表',
           date: '2025-07-09',
           link: '#'
         },
@@ -124,20 +237,11 @@ export default {
           link: '#'
         }
       ]
-    }
-  },
-  mounted() {
-    this.startAutoSlide()
-    this.startNoticeAutoScroll() // 启动公告自动滚动
-  },
-  beforeUnmount() {
-    this.clearTimers()
-    this.clearNoticeTimer() // 清理公告定时器
-  },
-  methods: {
+    },
+    
     startAutoSlide() {
       this.clearTimers()
-      if (!this.isPaused) {
+      if (!this.isPaused && this.bannerSlides.length > 0) {
         this.autoSlideTimer = setInterval(() => {
           this.nextSlide()
         }, this.slideInterval)
@@ -173,10 +277,12 @@ export default {
       this.startAutoSlide()
     },
     prevSlide() {
+      if (this.bannerSlides.length === 0) return
       this.currentSlide = this.currentSlide > 0 ? this.currentSlide - 1 : this.bannerSlides.length - 1
       this.restartAutoSlide()
     },
     nextSlide() {
+      if (this.bannerSlides.length === 0) return
       this.currentSlide = this.currentSlide < this.bannerSlides.length - 1 ? this.currentSlide + 1 : 0
       this.restartAutoSlide()
     },
@@ -187,9 +293,11 @@ export default {
     // 添加公告滚动相关方法
     startNoticeAutoScroll() {
       this.clearNoticeTimer()
-      this.noticeAutoScrollTimer = setInterval(() => {
-        this.nextNotice()
-      }, this.noticeScrollInterval)
+      if (this.notices.length > 0) {
+        this.noticeAutoScrollTimer = setInterval(() => {
+          this.nextNotice()
+        }, this.noticeScrollInterval)
+      }
     },
     
     clearNoticeTimer() {
@@ -200,6 +308,7 @@ export default {
     },
     
     prevNotice() {
+      if (this.notices.length === 0) return
       this.currentNoticeIndex = this.currentNoticeIndex > 0 
         ? this.currentNoticeIndex - 1 
         : this.notices.length - 1
@@ -207,6 +316,7 @@ export default {
     },
     
     nextNotice() {
+      if (this.notices.length === 0) return
       this.currentNoticeIndex = this.currentNoticeIndex < this.notices.length - 1 
         ? this.currentNoticeIndex + 1 
         : 0
@@ -618,5 +728,33 @@ export default {
 
 .visual-img img {
   display: block;
+}
+
+/* 加载状态样式 */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 </style>
