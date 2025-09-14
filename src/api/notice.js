@@ -20,7 +20,8 @@ export function getNoticeDetail(id) {
 // 获取最新公告（用于首页滚动显示）
 export function getLatestNotices(limit = 5) {
   return request({
-    url: '/notice/latest',
+    // url: '/notice/latest',
+    url: '/notice/getNoticePublic',
     method: 'get',
     params: { limit }
   })

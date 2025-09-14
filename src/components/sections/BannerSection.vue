@@ -174,7 +174,7 @@ export default {
         if (response && response.data) {
           return response.data.map(item => ({
             title: item.title || item.name,
-            date: this.formatDate(item.date || item.createdAt || item.publishTime),
+            date: this.formatDate(item.start_time || item.createdAt || item.publishTime),
             link: item.link || item.url || '#'
           }))
         }
@@ -222,17 +222,17 @@ export default {
     getDefaultNotices() {
       return [
         {
-          title: '华苏建设有限公司企业负责人202业绩',
+          title: 'XX华苏建设有限公司企业负责人202业绩',
           date: '2025-07-09',
           link: '#'
         },
         {
-          title: '华苏建设有限公司2025年度工资分配信息披露表',
+          title: 'XX华苏建设有限公司2025年度工资分配信息披露表',
           date: '2025-07-09',
           link: '#'
         },
         {
-          title: '华苏建设有限公司 2025年度高校毕业生招聘结果公示',
+          title: 'XX华苏建设有限公司 2025年度高校毕业生招聘结果公示',
           date: '2025-07-04',
           link: '#'
         }
