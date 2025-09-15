@@ -708,4 +708,13 @@ section.index #m_header {
     display: none !important;
   }
 }
+
+/* 覆盖AOS的pointer-events限制，确保导航链接可以点击 */
+.list_sj[data-aos] {
+  pointer-events: auto !important;
+}
+
+.list_sj[data-aos] * {
+  pointer-events: auto !important;
+}
 </style>
