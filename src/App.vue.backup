@@ -32,13 +32,6 @@ export default {
   methods: {
     handleRouteChange() {
       const hash = window.location.hash
-      
-      // 如果当前在Company页面，且hash是Company页面的子页面，不要重新渲染
-      if (this.currentPage === 'company' && 
-          (hash === '#company' || hash === '#honor' || hash === '#contact' || hash === '#about')) {
-        return // 不重新渲染，让Company组件自己处理
-      }
-      
       // 检查是否是公司页面的子页面
       if (hash.startsWith('#company') || 
           hash === '#honor' || 

@@ -19,13 +19,13 @@
         <div class="wp">
           <ul>
             <li :class="{ on: currentTab === 'company' }">
-              <a href="#company" title="集团简介" @click="switchTab('company')">集团简介</a>
+              <a href="#company" title="集团简介">集团简介</a>
             </li>
             <li :class="{ on: currentTab === 'honor' }">
-              <a href="#honor" title="集团荣誉" @click="switchTab('honor')">集团荣誉</a>
+              <a href="#honor" title="集团荣誉">集团荣誉</a>
             </li>
             <li :class="{ on: currentTab === 'contact' }">
-              <a href="#contact" title="联系华苏" @click="switchTab('contact')">联系华苏</a>
+              <a href="#contact" title="联系华苏">联系华苏</a>
             </li>
           </ul>
         </div>
@@ -46,13 +46,13 @@
       <div id="sub_nav_content" :class="{ show: showMobileNav }">
         <dl>
           <dt :class="{ on: currentTab === 'company' }">
-            <a href="#company" title="集团简介" @click="switchTab('company')">集团简介</a>
+            <a href="#company" title="集团简介">集团简介</a>
           </dt>
           <dt :class="{ on: currentTab === 'honor' }">
-            <a href="#honor" title="集团荣誉" @click="switchTab('honor')">集团荣誉</a>
+            <a href="#honor" title="集团荣誉">集团荣誉</a>
           </dt>
           <dt :class="{ on: currentTab === 'contact' }">
-            <a href="#contact" title="联系华苏" @click="switchTab('contact')">联系华苏</a>
+            <a href="#contact" title="联系华苏">联系华苏</a>
           </dt>
         </dl>
       </div>
@@ -325,28 +325,12 @@ export default {
 }
 /* 确保AOS元素在动画库未加载时也能显示 */
 [data-aos] {
-/* 覆盖AOS的pointer-events限制，确保导航链接可以点击 */
-.list_sj[data-aos] {
-  pointer-events: auto !important;
-}
-
-.list_sj[data-aos] * {
-  pointer-events: auto !important;
-}
   opacity: 1 !important;
   transform: none !important;
 }
 
 /* 当AOS加载后，恢复正常的动画行为 */
 html:not(.no-js) [data-aos] {
-/* 覆盖AOS的pointer-events限制，确保导航链接可以点击 */
-.list_sj[data-aos] {
-  pointer-events: auto !important;
-}
-
-.list_sj[data-aos] * {
-  pointer-events: auto !important;
-}
   opacity: 0;
   transform: translate3d(0, 60px, 0);
 }

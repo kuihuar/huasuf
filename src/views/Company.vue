@@ -18,9 +18,15 @@
       <section class="list_sj" data-aos="fade-up">
         <div class="wp">
           <ul>
-            <li class="on"><a href="#about" @click="switchTab('about')" title="集团简介">集团简介</a></li>
-            <li><a href="#honor" @click="switchTab('honor')" title="集团荣誉">集团荣誉</a></li>
-            <li><a href="#contact" @click="switchTab('contact')" title="联系华苏">联系华苏</a></li>
+            <li :class="{ on: currentTab === 'company' }">
+              <a href="#company" title="集团简介" @click="switchTab('company')">集团简介</a>
+            </li>
+            <li :class="{ on: currentTab === 'honor' }">
+              <a href="#honor" title="集团荣誉" @click="switchTab('honor')">集团荣誉</a>
+            </li>
+            <li :class="{ on: currentTab === 'contact' }">
+              <a href="#contact" title="联系华苏" @click="switchTab('contact')">联系华苏</a>
+            </li>
           </ul>
         </div>
       </section>
@@ -32,21 +38,21 @@
         <a id="bnt_back" href="javascript:history.go(-1)" class="iconfont">
           <img src="/src/assets/images/m_n_nav_left.svg" />
         </a>
-        <h1>集团简介</h1>
+        <h1>{{ getCurrentTitle() }}</h1>
         <div id="bnt_sub_nav" class="iconfont" @click="toggleMobileNav">
           <img src="/src/assets/images/m_n_nav_right.svg" />
         </div>
       </div>
       <div id="sub_nav_content" :class="{ show: showMobileNav }">
         <dl>
-          <dt :class="{ on: currentTab === 'about' }">
-            <a href="#about" @click="switchTab('about')" title="集团简介">集团简介</a>
+          <dt :class="{ on: currentTab === 'company' }">
+            <a href="#company" title="集团简介" @click="switchTab('company')">集团简介</a>
           </dt>
           <dt :class="{ on: currentTab === 'honor' }">
-            <a href="#honor" @click="switchTab('honor')" title="集团荣誉">集团荣誉</a>
+            <a href="#honor" title="集团荣誉" @click="switchTab('honor')">集团荣誉</a>
           </dt>
           <dt :class="{ on: currentTab === 'contact' }">
-            <a href="#contact" @click="switchTab('contact')" title="联系华苏">联系华苏</a>
+            <a href="#contact" title="联系华苏" @click="switchTab('contact')">联系华苏</a>
           </dt>
         </dl>
       </div>
@@ -55,7 +61,7 @@
 
     <!-- 主体内容部分 - 与n_banner同级 -->
     <section class="n_container">
-      <AboutCompany v-if="currentTab === 'about'" />
+      <AboutCompany v-if="currentTab === 'company'" />
       <CompanyHonor v-if="currentTab === 'honor'" />
       <ContactCompany v-if="currentTab === 'contact'" />
     </section>
@@ -83,7 +89,7 @@ export default {
   },
   data() {
     return {
-      currentTab: 'about',
+      currentTab: 'company', // 默认显示集团简介
       showMobileNav: false
     }
   },
@@ -108,21 +114,29 @@ export default {
     switchTab(tab) {
       this.currentTab = tab
       this.showMobileNav = false
-      // 使用更安全的 hash 前缀，避免与 fullpage.js 冲突
-      window.location.hash = `#company-${tab}`
+      // 更新URL hash
+      window.location.hash = `#${tab}`
     },
     handleRouteChange() {
       const hash = window.location.hash
-      if (hash === '#company-honor') {
+      if (hash === '#honor') {
         this.currentTab = 'honor'
-      } else if (hash === '#company-contact') {
+      } else if (hash === '#contact') {
         this.currentTab = 'contact'
       } else {
-        this.currentTab = 'about'
+        this.currentTab = 'company'
       }
     },
     toggleMobileNav() {
       this.showMobileNav = !this.showMobileNav
+    },
+    getCurrentTitle() {
+      const titles = {
+        'company': '集团简介',
+        'honor': '集团荣誉',
+        'contact': '联系华苏'
+      }
+      return titles[this.currentTab] || '集团简介'
     },
     initAOS() {
       // 确保AOS库已加载
@@ -179,8 +193,6 @@ export default {
 .list_sj {
   display: block !important;
 }
-
-
 
 /* 修复 list_sj ul li a 的显示问题 */
 .list_sj ul li a {
@@ -313,12 +325,28 @@ export default {
 }
 /* 确保AOS元素在动画库未加载时也能显示 */
 [data-aos] {
+/* 覆盖AOS的pointer-events限制，确保导航链接可以点击 */
+.list_sj[data-aos] {
+  pointer-events: auto !important;
+}
+
+.list_sj[data-aos] * {
+  pointer-events: auto !important;
+}
   opacity: 1 !important;
   transform: none !important;
 }
 
 /* 当AOS加载后，恢复正常的动画行为 */
 html:not(.no-js) [data-aos] {
+/* 覆盖AOS的pointer-events限制，确保导航链接可以点击 */
+.list_sj[data-aos] {
+  pointer-events: auto !important;
+}
+
+.list_sj[data-aos] * {
+  pointer-events: auto !important;
+}
   opacity: 0;
   transform: translate3d(0, 60px, 0);
 }
@@ -348,7 +376,6 @@ html:not(.no-js) [data-aos].aos-animate {
   padding: 1.1rem 0 !important;
   min-height: 2rem;
 }
-</style>
 
 /* 覆盖fullpage.js的overflow设置，确保公司页面可以正常滚动 */
 .company-page {
@@ -375,9 +402,18 @@ html.company-page-active {
   min-height: auto !important;
   height: auto !important;
 }
-
 /* 确保内容区域有足够的内边距 */
 .n_pad1 {
   padding: 1.1rem 0 !important;
   min-height: 2rem;
 }
+
+/* 覆盖AOS的pointer-events限制，确保导航链接可以点击 */
+.list_sj[data-aos] {
+  pointer-events: auto !important;
+}
+
+.list_sj[data-aos] * {
+  pointer-events: auto !important;
+}
+</style>
