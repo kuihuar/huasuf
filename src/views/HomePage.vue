@@ -57,16 +57,32 @@ export default {
     TopicSection,
     FooterSection
   },
+  data() {
+    return {
+      fullpageInstance: null
+    }
+  },
   mounted() {
     // 初始化fullpage.js
     if (window.innerWidth >= 1200) {
       this.initFullpage()
     }
   },
+  beforeDestroy() {
+    // 销毁fullpage.js实例，清理全局监听器
+    this.destroyFullpage()
+  },
   methods: {
     initFullpage() {
-      new fullpage('#fullpage', {
-        anchors: ['f0', 'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8'],
+      // 如果已经存在实例，先销毁
+      if (this.fullpageInstance) {
+        this.destroyFullpage()
+      }
+      
+      this.fullpageInstance = new fullpage('#fullpage', {
+        anchors: ["f0", "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8"],
+        recordHistory: false,
+        updateHash: false,
         normalScrollElements: '.slide_down_nav',
         scrollingSpeed: 1000,
         fitToSectionDelay: 2000,
@@ -83,6 +99,20 @@ export default {
           }
         }
       })
+    },
+    destroyFullpage() {
+      // 销毁fullpage.js实例，清理所有全局监听器
+      if (this.fullpageInstance && window.fullpage_api) {
+        try {
+          // 完全销毁fullpage.js，包括DOM结构和事件监听器
+          window.fullpage_api.destroy('all')
+          console.log('Fullpage.js destroyed successfully')
+        } catch (error) {
+          console.warn('Error destroying fullpage.js:', error)
+        }
+        this.fullpageInstance = null
+        window.fullpage_api = null
+      }
     },
     triggerCountUp() {
       // 触发数字动画

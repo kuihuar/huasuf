@@ -5,7 +5,7 @@
       <div class="nav_wrap fix">
         <h1 class="l logo" id="logo">
           <img src="@/assets/images/logo_w.png" alt="华苏建设有限公司">  
-          <a href="#" style="display: inline;color: #ffffff;">华苏建设有限公司</a>
+          <a href="#home" style="display: inline;color: #ffffff;">华苏建设有限公司</a>
         </h1>
         <div class="nav fix r">
           <ul class="fix l">
@@ -94,10 +94,9 @@ export default {
           description: '奉献精品 开创未来',
           content: '华苏建设有限公司（以下简称"山西投"）系山西省规模最大的综合性国有投资设集团。其前身为中央人民政府工部太原工程局、国家工部华北工程管理局、国家工部和国家委第八工程局，组于1953年，1970年下放山西，改称山西省筑工程管理局。',
           children: [
-            { id: 11, title: '集团简介', href: '#' },
-            { id: 12, title: '组织架构', href: '#' },
-            { id: 13, title: '集团荣誉', href: '#' },
-            { id: 14, title: '联系华苏', href: '#' }
+            { id: 11, title: '集团简介', href: '#company' },
+            { id: 13, title: '集团荣誉', href: '#honor' },
+            { id: 14, title: '联系华苏', href: '#contact' }
           ]
         },
         {

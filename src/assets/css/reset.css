@@ -450,14 +450,14 @@ textarea:-ms-input-placeholder {
 	width: 100%
 }
 
-.img .img_hezi {
+/* .img .img_hezi {
 	min-height: 200px;
 	
 	transition: .5s;
 	background-size: cover !important;
 	background-position: center !important;
 	background-repeat: no-repeat !important;
-}
+} */
 
 .img_zd>img {
 	position: absolute;

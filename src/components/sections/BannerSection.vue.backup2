@@ -78,7 +78,6 @@
 <script>
 import { getCarouselList } from '@/api/carousel.js'
 import { getLatestNotices } from '@/api/notice.js'
-import { API_CONFIG } from '@/config/api.js'
 
 export default {
   name: 'BannerSection',
@@ -155,7 +154,7 @@ export default {
         // 根据实际API返回结构调整
         if (response && response.data) {
           return response.data.map(item => ({
-            image: API_CONFIG.BASE_URL + item.image || item.imageUrl,
+            image: item.image || item.imageUrl,
             title: item.title || item.name,
             link: item.link || item.url || '#'
           }))

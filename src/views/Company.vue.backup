@@ -1,0 +1,328 @@
+<template>
+  <div class="company-page">
+    <!-- 外层Header -->
+    <HeaderNav />
+    
+    <!-- Banner部分 -->
+    <section class="n_banner">
+      <div class="img slow img_zd">
+        <div class="img_hezi" style="background:url('/src/assets/images/n_banner1.jpg');"></div>
+        <img src="/src/assets/images/n_banner1.jpg" class="none" />
+      </div>
+      <div class="top">
+        <div class="wp">
+          <h3 data-aos="fade-up" data-aos-delay="200">关于华苏</h3>
+          <p data-aos="fade-up" data-aos-delay="600"></p>
+        </div>
+      </div>
+      <section class="list_sj" data-aos="fade-up">
+        <div class="wp">
+          <ul>
+            <li class="on"><a href="#about" @click="switchTab('about')" title="集团简介">集团简介</a></li>
+            <li><a href="#honor" @click="switchTab('honor')" title="集团荣誉">集团荣誉</a></li>
+            <li><a href="#contact" @click="switchTab('contact')" title="联系华苏">联系华苏</a></li>
+          </ul>
+        </div>
+      </section>
+    </section>
+
+    <!-- 手机端内页菜单 -->
+    <section id="m_n_nav">
+      <div id="n_n_title"> 
+        <a id="bnt_back" href="javascript:history.go(-1)" class="iconfont">
+          <img src="/src/assets/images/m_n_nav_left.svg" />
+        </a>
+        <h1>集团简介</h1>
+        <div id="bnt_sub_nav" class="iconfont" @click="toggleMobileNav">
+          <img src="/src/assets/images/m_n_nav_right.svg" />
+        </div>
+      </div>
+      <div id="sub_nav_content" :class="{ show: showMobileNav }">
+        <dl>
+          <dt :class="{ on: currentTab === 'about' }">
+            <a href="#about" @click="switchTab('about')" title="集团简介">集团简介</a>
+          </dt>
+          <dt :class="{ on: currentTab === 'honor' }">
+            <a href="#honor" @click="switchTab('honor')" title="集团荣誉">集团荣誉</a>
+          </dt>
+          <dt :class="{ on: currentTab === 'contact' }">
+            <a href="#contact" @click="switchTab('contact')" title="联系华苏">联系华苏</a>
+          </dt>
+        </dl>
+      </div>
+    </section>
+    <div class="clear"></div>
+
+    <!-- 主体内容部分 - 与n_banner同级 -->
+    <section class="n_container">
+      <AboutCompany v-if="currentTab === 'about'" />
+      <CompanyHonor v-if="currentTab === 'honor'" />
+      <ContactCompany v-if="currentTab === 'contact'" />
+    </section>
+
+    <!-- 外层Footer -->
+    <FooterSection />
+  </div>
+</template>
+
+<script>
+import HeaderNav from '@/components/layout/HeaderNav.vue'
+import FooterSection from '@/components/layout/FooterSection.vue'
+import AboutCompany from '@/components/company/AboutCompany.vue'
+import CompanyHonor from '@/components/company/CompanyHonor.vue'
+import ContactCompany from '@/components/company/ContactCompany.vue'
+
+export default {
+  name: 'Company',
+  components: {
+    HeaderNav,
+    FooterSection,
+    AboutCompany,
+    CompanyHonor,
+    ContactCompany
+  },
+  data() {
+    return {
+      currentTab: 'about',
+      showMobileNav: false
+    }
+  },
+  mounted() {
+    // 根据URL hash设置当前标签页
+    this.handleRouteChange()
+    window.addEventListener('hashchange', this.handleRouteChange)
+    
+    // 初始化AOS动画
+    this.initAOS()
+  },
+  beforeDestroy() {
+    window.removeEventListener('hashchange', this.handleRouteChange)
+  },
+  methods: {
+    switchTab(tab) {
+      this.currentTab = tab
+      this.showMobileNav = false
+      // 更新URL hash
+      window.location.hash = `#${tab}`
+    },
+    handleRouteChange() {
+      const hash = window.location.hash
+      if (hash === '#honor') {
+        this.currentTab = 'honor'
+      } else if (hash === '#contact') {
+        this.currentTab = 'contact'
+      } else {
+        this.currentTab = 'about'
+      }
+    },
+    toggleMobileNav() {
+      this.showMobileNav = !this.showMobileNav
+    },
+    initAOS() {
+      // 确保AOS库已加载
+      if (window.AOS) {
+        window.AOS.init({
+          duration: 1000,
+          once: true,
+          offset: 100,
+          disable: false
+        })
+      }
+    }
+  }
+}
+</script>
+
+<style scoped>
+@import '/src/assets/css/reset.css';
+@import '/src/assets/css/animate.css';
+@import '/src/assets/css/style.css';
+
+.company-page {
+  min-height: 100vh;
+}
+
+/* 强制显示 list_sj，覆盖所有媒体查询的隐藏设置 */
+.list_sj{ position: absolute; right: 0; bottom: 0; left: 0; background: rgba(255,255,255,.7);}
+.list_sj ul{display: flex;flex-wrap: wrap;min-height: .56rem;}
+.list_sj ul li{ min-width: 16.66667%; border-right: #94a7d5 1px solid;}
+.list_sj ul li *{ transition: .5s;}
+.list_sj ul li a{ 
+	display: flex; width: 100%; height: .56rem; 
+	justify-content: center; align-items: center; 
+	font-size: .2rem; color: #000000;
+	padding: 0 .15rem;
+}
+/* .list_sj ul li:first-child{ border-left: #94a7d5 1px solid; } */
+.list_sj {
+  display: block !important;
+}
+
+
+
+/* 修复 list_sj ul li a 的显示问题 */
+.list_sj ul li a {
+  display: flex !important;
+  width: 100% !important;
+  height: 0.56rem !important;
+  justify-content: center !important;
+  align-items: center !important;
+  font-size: 0.2rem !important;
+  color: #000000 !important;
+  padding: 0 0.15rem !important;
+  text-decoration: none !important;
+  font-weight: normal !important;
+}
+.list_sj ul li.on a, .list_sj ul li a:hover {
+    background: #284ca7;
+    color: #fff;
+    font-weight: bold;
+}
+/* 移动端导航样式补充 */
+#m_n_nav {
+  display: none;
+}
+
+#n_n_title {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  background: #254596;
+  border-bottom: 1px solid #eee;
+}
+
+#bnt_back {
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+#bnt_back img {
+  width: 20px;
+  height: 20px;
+}
+
+#n_n_title h1 {
+  flex: 1;
+  margin: 0;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  line-height: 50px;
+  width: 66%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#bnt_sub_nav {
+  cursor: pointer;
+}
+
+#bnt_sub_nav img {
+  width: 20px;
+  height: 20px;
+}
+
+#sub_nav_content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  background: white;
+}
+
+#sub_nav_content.show {
+  max-height: 300px;
+}
+
+#sub_nav_content dl {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#sub_nav_content dt {
+  margin: 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+#sub_nav_content dt:last-child {
+  border-bottom: none;
+}
+
+#sub_nav_content dt a {
+  display: block;
+  padding: 15px 20px;
+  color: #666;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+#sub_nav_content dt a:hover {
+  background: #f8f9fa;
+  color: #ff6b35;
+}
+
+#sub_nav_content dt.on a {
+  background: #0080ff;
+  color: #ff6b35;
+  font-weight: bold;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  #m_n_nav {
+    display: block;
+  }
+  
+  /* .list_sj {
+    display: none;
+  } */
+}
+
+.clear {
+  clear: both;
+}
+/* 确保AOS元素在动画库未加载时也能显示 */
+[data-aos] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* 当AOS加载后，恢复正常的动画行为 */
+html:not(.no-js) [data-aos] {
+  opacity: 0;
+  transform: translate3d(0, 60px, 0);
+}
+
+html:not(.no-js) [data-aos].aos-animate {
+  opacity: 1;
+  transform: none;
+}
+</style>
+
+
+
+  },
+  mounted() {
+    // 根据URL hash设置当前标签页
+    this.handleRouteChange()
+    window.addEventListener('hashchange', this.handleRouteChange)
+    
+    // 初始化AOS动画
+    this.initAOS()
+    
+    // 防止fullpage.js干扰公司页面的滚动
+    this.preventFullpageInterference()
+  },
+  beforeDestroy() {
+    window.removeEventListener('hashchange', this.handleRouteChange)
+  },
+  methods: {
+    preventFullpageInterference() {
+      // 禁用fullpage.js的滚动监听
+      if (window.fullpage_api) {
+        window.fullpage_api.setMouseWheelScrolling(false)
+        window.fullpage_api.setKeyboardScrolling(false)
+      }
+    },

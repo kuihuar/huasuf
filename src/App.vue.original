@@ -32,7 +32,7 @@ export default {
   methods: {
     handleRouteChange() {
       const hash = window.location.hash
-      if (hash.startsWith('#company')) {
+      if (hash === '#company') {
         this.currentPage = 'company'
       } else {
         this.currentPage = 'home'

@@ -59,8 +59,8 @@ export default {
           children: [
             { id: 11, title: '集团简介', href: '#' },
             { id: 12, title: '组织架构', href: '#' },
-            { id: 13, title: '集团荣誉', href: '#' },
-            { id: 14, title: '联系华苏', href: '#' }
+            { id: 13, title: '集团荣誉', href: '#honor' },
+            { id: 14, title: '联系华苏', href: '#contact' }
           ]
         },
         {

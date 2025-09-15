@@ -31,7 +31,7 @@
           <div class="tel">联系我们</div>
           <dl>
             <dd>地址：山西省太原市迎泽区迎泽大街300号</dd>
-            <dd>电话：0351-12345678</dd>
+            <dd>电话：0352-12345678</dd>
             <dd>邮箱：info@huasu.com</dd>
           </dl>
           <div class="more">
@@ -60,10 +60,10 @@ export default {
         {
           title: '关于华苏',
           links: [
-            { title: '集团简介', href: '#', target: '_self' },
-            { title: '组织架构', href: '#', target: '_self' },
-            { title: '集团荣誉', href: '#', target: '_self' },
-            { title: '联系华苏', href: '#', target: '_self' }
+            { title: '集团简介', href: '#company', target: '_self' },
+            // { title: '组织架构', href: '#', target: '_self' },
+            { title: '集团荣誉', href: '#honor', target: '_self' },
+            { title: '联系华苏', href: '#contact', target: '_self' }
           ]
         },
         {

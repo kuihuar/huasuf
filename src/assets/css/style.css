@@ -8,7 +8,7 @@
 .section.main-visual-wrapper .fp-tableCell{ padding: 0}
 
 /* Ensure background images used via .img_hezi are responsive and not distorted */
-.img .img_hezi{ background-size: cover; background-position: center center; background-repeat: no-repeat; width: 100%; display: block; }
+/* .img .img_hezi{ background-size: cover; background-position: center center; background-repeat: no-repeat; width: 100%; display: block; } */
 
 /* Make the first screen adapt to viewport height */
 .section.home1{ min-height: 100vh; }
@@ -964,20 +964,14 @@ section.active.home1 .box1 .tit1::after, section.active.home1 .box3 .tit1::after
 .n_banner .top h3{font-size: .42rem;color: #fff;font-weight: bold;}
 .n_banner .top p{font-size: .2rem;color: #fff;line-height: 1.5;margin: .15rem 0 0;font-weight: 100;}
 
-.list_sj{ position: absolute; right: 0; bottom: 0; left: 0; background: rgba(255,255,255,.7);}
-.list_sj ul{display: flex;flex-wrap: wrap;min-height: .56rem;}
-.list_sj ul li{ min-width: 16.66667%; border-right: #94a7d5 1px solid;}
-.list_sj ul li *{ transition: .5s;}
-.list_sj ul li a{ display: flex; width: 100%; height: .56rem; justify-content: center; align-items: center; font-size: .2rem; color: #222222;padding: 0 .15rem;}
-.list_sj ul li:first-child{ border-left: #94a7d5 1px solid; }
 
-.list_sj ul li.on a, .list_sj ul li a:hover{ background: #284ca7;; color: #fff; font-weight: bold;}
+/* .list_sj ul li.on a, .list_sj ul li a:hover{ background: #284ca7;; color: #d91717; font-weight: bold;} */
 
 #m_n_nav {display: none;line-height: 50px;position: relative;z-index: 9;float: left;width: 100%;background: #254596;}
 #bnt_back { position: absolute; left: 15px; top: 0px; }
 #bnt_back img { height: 28px; }
 #bnt_back svg { fill: rgb(255, 255, 255); height: 30px; vertical-align: middle; width: 26px; }
-#m_n_nav i { }
+
 #m_n_nav h1 { font-size: 14px; color: rgb(255, 255, 255); text-align: center; margin: 0 auto; line-height: 50px; width: 66%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 #bnt_sub_nav { position: absolute; right: 15px; top: 0px; height: 50px; cursor: pointer; color: rgb(255, 255, 255); font-size: 18px; display: flex; align-items: center; }
 #bnt_sub_nav svg { fill: rgb(255, 255, 255); height: 20px; vertical-align: middle; width: 20px; }
@@ -1022,7 +1016,7 @@ section.active.home1 .box1 .tit1::after, section.active.home1 .box3 .tit1::after
 
 /*关于建投-组织架构*/
 
-.n_container{ overflow: hidden; position: relative; z-index: 2;}
+.n_container{ overflow: visible; position: relative; z-index: 2;}
 .n_pad1{ padding: 1.1rem 0;}
 .list_sij{ margin-bottom: .65rem;}
 .list_sij ul{ justify-content: center; margin: 0 -1px; }
@@ -1090,7 +1084,7 @@ section.active.home1 .box1 .tit1::after, section.active.home1 .box3 .tit1::after
 	.list17 li .a:hover::after{ opacity: 1;}
 }
 @media(max-width: 1200px){	
-	.list_sj{ display: none;}
+	/* .list_sj{ display: none;} */  /* 注释掉这行 */
 }
 @media(max-width: 992px){
 	.n_pad1{ padding: .5rem 0;}
@@ -2185,3 +2179,7 @@ section.active.home1 .box1 .tit1::after, section.active.home1 .box3 .tit1::after
 .nav_box.white .nav_wrap .logo .b_logo{display:none;}
 .nav_box .nav .nav_li{float:left;font-size: .18rem;color:#343434;margin: 0 .28rem;position:relative;}
 .nav_box.white .nav .nav_li{color:#fff;}
+
+@media(max-width: 768px){	
+	.list_sj{ display: none;}
+}
