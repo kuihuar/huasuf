@@ -95,8 +95,8 @@ export default {
           content: '华苏建设有限公司（以下简称"山西投"）系山西省规模最大的综合性国有投资设集团。其前身为中央人民政府工部太原工程局、国家工部华北工程管理局、国家工部和国家委第八工程局，组于1953年，1970年下放山西，改称山西省筑工程管理局。',
           children: [
             { id: 11, title: '集团简介', href: "/company" },
-            { id: 13, title: '集团荣誉', href: "/company#honor" },
-            { id: 14, title: '联系华苏', href: "/company#contact" }
+            { id: 13, title: '集团荣誉', href: "/company/honor" },
+            { id: 14, title: '联系华苏', href: "/company/contact" }
           ]
         },
         {
@@ -107,8 +107,8 @@ export default {
           content: '山西投现辖56个全资、控股和参股子公司，其中上市公司2家；职工总数3.5万余人，其中各类经营管理和专业技术人才2.7万余人；拥有7个筑、3个市政公用、1个石油化工，共11项工程施工总承包特级资质。',
           children: [
             { id: 21, title: '新闻中心', href: "/news" },
-            { id: 22, title: '国际资讯', href: "/news#corporate" },
-            { id: 23, title: '公司要闻', href: "/news#key" }
+            { id: 22, title: '国际资讯', href: "/news/corporate" },
+            { id: 23, title: '公司要闻', href: "/news/key" }
           ]
         },
         // {
