@@ -1,55 +1,13 @@
 <template>
   <div id="app">
-    <!-- 根据当前页面显示不同内容 -->
-    <HomePage v-if="currentPage === 'home'" />
-    <Company v-else-if="currentPage === 'company'" />
+    <!-- 使用Vue Router的router-view -->
+    <router-view />
   </div>
 </template>
 
 <script>
-import HomePage from './views/HomePage.vue'
-import Company from './views/Company.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HomePage,
-    Company
-  },
-  data() {
-    return {
-      currentPage: 'home'
-    }
-  },
-  mounted() {
-    // 监听URL变化
-    this.handleRouteChange()
-    window.addEventListener('hashchange', this.handleRouteChange)
-  },
-  beforeDestroy() {
-    window.removeEventListener('hashchange', this.handleRouteChange)
-  },
-  methods: {
-    handleRouteChange() {
-      const hash = window.location.hash
-      
-      // 如果当前在Company页面，且hash是Company页面的子页面，不要重新渲染
-      if (this.currentPage === 'company' && 
-          (hash === '#company' || hash === '#honor' || hash === '#contact' || hash === '#about')) {
-        return // 不重新渲染，让Company组件自己处理
-      }
-      
-      // 检查是否是公司页面的子页面
-      if (hash.startsWith('#company') || 
-          hash === '#honor' || 
-          hash === '#contact' || 
-          hash === '#about') {
-        this.currentPage = 'company'
-      } else {
-        this.currentPage = 'home'
-      }
-    }
-  }
+  name: 'App'
 }
 </script>
 
@@ -73,7 +31,9 @@ body {
 }
 
 /* Ensure full-height context */
-html, body, #app { height: 100%; }
+html, body, #app { 
+  height: 100%; 
+}
 
 /* On small screens (no fullpage.js), push footer to the bottom */
 @media (max-width: 1199px) {
@@ -90,5 +50,23 @@ html, body, #app { height: 100%; }
   .section.footer {
     margin-top: auto;
   }
+}
+
+/* 新闻页面特定样式 */
+.news-page-active {
+  overflow: auto !important;
+}
+
+.news-page-active #fullpage {
+  display: none !important;
+}
+
+/* 公司页面特定样式 */
+.company-page-active {
+  overflow: auto !important;
+}
+
+.company-page-active #fullpage {
+  display: none !important;
 }
 </style>

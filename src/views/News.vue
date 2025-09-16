@@ -1,31 +1,32 @@
 <template>
-  <div class="company-page">
+  <div class="news-page">
     <!-- 外层Header -->
     <HeaderNav />
-    
+
     <!-- Banner部分 -->
     <section class="n_banner">
       <div class="img slow img_zd">
-        <div class="img_hezi" style="background:url('/src/assets/images/n_banner1.jpg');"></div>
+        <div class="img_hezi" style=" background:url(/src/assets/images/n_banner1.jpg);"></div>
         <img src="/src/assets/images/n_banner1.jpg" class="none" />
+
       </div>
       <div class="top">
         <div class="wp">
-          <h3 data-aos="fade-up" data-aos-delay="200">关于华苏</h3>
-          <p data-aos="fade-up" data-aos-delay="600"></p>
+          <h3 data-aos="fade-up" data-aos-delay="200">新闻中心</h3>
+          <p data-aos="fade-up" data-aos-delay="600">了解华苏最新动态</p>
         </div>
       </div>
       <section class="list_sj" data-aos="fade-up">
         <div class="wp">
           <ul>
-            <li :class="{ on: currentTab === 'about' }">
-              <router-link to="/company/about" title="集团简介">集团简介</router-link>
+            <li :class="{ on: currentTab === 'center' }">
+              <router-link to="/news/center" title="新闻中心">新闻中心</router-link>
             </li>
-            <li :class="{ on: currentTab === 'honor' }">
-              <router-link to="/company/honor" title="集团荣誉">集团荣誉</router-link>
+            <li :class="{ on: currentTab === 'corporate' }">
+              <router-link to="/news/corporate" title="">国际资讯</router-link>
             </li>
-            <li :class="{ on: currentTab === 'contact' }">
-              <router-link to="/company/contact" title="联系华苏">联系华苏</router-link>
+            <li :class="{ on: currentTab === 'key' }">
+              <router-link to="/news/key" title="公司要闻">公司要闻</router-link>
             </li>
           </ul>
         </div>
@@ -34,7 +35,7 @@
 
     <!-- 手机端内页菜单 -->
     <section id="m_n_nav">
-      <div id="n_n_title"> 
+      <div id="n_n_title">
         <a id="bnt_back" href="javascript:history.go(-1)" class="iconfont">
           <img src="/src/assets/images/m_n_nav_left.svg" />
         </a>
@@ -45,14 +46,14 @@
       </div>
       <div id="sub_nav_content" :class="{ show: showMobileNav }">
         <dl>
-          <dt :class="{ on: currentTab === 'about' }">
-            <router-link to="/company/about" title="集团简介">集团简介</router-link>
+          <dt :class="{ on: currentTab === 'center' }">
+            <router-link to="/news/center" title="新闻中心">新闻中心</router-link>
           </dt>
-          <dt :class="{ on: currentTab === 'honor' }">
-            <router-link to="/company/honor" title="集团荣誉">集团荣誉</router-link>
+          <dt :class="{ on: currentTab === 'corporate' }">
+            <router-link to="/news/corporate" title=""></router-link>
           </dt>
-          <dt :class="{ on: currentTab === 'contact' }">
-            <router-link to="/company/contact" title="联系华苏">联系华苏</router-link>
+          <dt :class="{ on: currentTab === 'key' }">
+            <router-link to="/news/key" title="公司要闻">公司要闻</router-link>
           </dt>
         </dl>
       </div>
@@ -61,9 +62,9 @@
 
     <!-- 主体内容部分 -->
     <section class="n_container">
-      <AboutCompany v-if="currentTab === 'about'" />
-      <CompanyHonor v-if="currentTab === 'honor'" />
-      <ContactCompany v-if="currentTab === 'contact'" />
+      <CenterNews v-if="currentTab === 'center'" />
+      <CorporateNews v-if="currentTab === 'corporate'" />
+      <KeyNews v-if="currentTab === 'key'" />
     </section>
 
     <!-- 外层Footer -->
@@ -74,18 +75,18 @@
 <script>
 import HeaderNav from '@/components/layout/HeaderNav.vue'
 import FooterSection from '@/components/layout/FooterSection.vue'
-import AboutCompany from '@/components/company/AboutCompany.vue'
-import CompanyHonor from '@/components/company/CompanyHonor.vue'
-import ContactCompany from '@/components/company/ContactCompany.vue'
+import CenterNews from '@/components/news/CenterNews.vue'
+import CorporateNews from '@/components/news/CorporateNews.vue'
+import KeyNews from '@/components/news/KeyNews.vue'
 
 export default {
-  name: 'Company',
+  name: 'News',
   components: {
     HeaderNav,
     FooterSection,
-    AboutCompany,
-    CompanyHonor,
-    ContactCompany
+    CenterNews,
+    CorporateNews,
+    KeyNews
   },
   data() {
     return {
@@ -94,21 +95,21 @@ export default {
   },
   computed: {
     currentTab() {
-      // 从路由参数获取当前标签页，默认为 'about'
-      return this.$route.params.tab || 'about'
+      // 从路由参数获取当前标签页，默认为 'center'
+      return this.$route.params.tab || 'center'
     }
   },
   mounted() {
     // 初始化AOS动画
     this.initAOS()
-    
+
     // 确保fullpage.js完全禁用
     this.ensureFullpageDisabled()
   },
   beforeDestroy() {
-    // 清理公司页面滚动设置
-    document.body.classList.remove("company-page-active")
-    document.documentElement.classList.remove("company-page-active")
+    // 清理新闻页面滚动设置
+    document.body.classList.remove("news-page-active")
+    document.documentElement.classList.remove("news-page-active")
   },
   methods: {
     toggleMobileNav() {
@@ -116,11 +117,11 @@ export default {
     },
     getCurrentTitle() {
       const titles = {
-        'about': '集团简介',
-        'honor': '集团荣誉',
-        'contact': '联系华苏'
+        'center': '新闻中心',
+        'corporate': '',
+        'key': '公司要闻'
       }
-      return titles[this.currentTab] || '集团简介'
+      return titles[this.currentTab] || '新闻中心'
     },
     initAOS() {
       // 确保AOS库已加载
@@ -138,16 +139,16 @@ export default {
       if (window.fullpage_api) {
         try {
           window.fullpage_api.destroy('all')
-          console.log('Fullpage.js destroyed in Company page')
+          console.log('Fullpage.js destroyed in News page')
         } catch (error) {
-          console.warn('Error destroying fullpage.js in Company page:', error)
+          console.warn('Error destroying fullpage.js in News page:', error)
         }
         window.fullpage_api = null
       }
-      
+
       // 添加页面特定的class
-      document.body.classList.add("company-page-active")
-      document.documentElement.classList.add("company-page-active")
+      document.body.classList.add("news-page-active")
+      document.documentElement.classList.add("news-page-active")
       
       // 确保页面可以正常滚动
       document.body.style.overflow = 'auto'
@@ -162,7 +163,7 @@ export default {
 @import '/src/assets/css/animate.css';
 @import '/src/assets/css/style.css';
 
-.company-page {
+.news-page {
   min-height: 100vh;
 }
 
@@ -194,6 +195,7 @@ export default {
   text-decoration: none !important;
   font-weight: normal !important;
 } */
+
 .list_sj ul li.on a, .list_sj ul li a:hover {
     background: #284ca7;
     color: #fff;
@@ -326,7 +328,7 @@ html:not(.no-js) [data-aos].aos-animate {
 }
 
 /* 确保页面内容能够正常显示 */
-.company-page {
+.news-page {
   min-height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
@@ -337,26 +339,16 @@ html:not(.no-js) [data-aos].aos-animate {
   min-height: auto !important;
 }
 
-.about {
-  min-height: auto !important;
-}
-
-/* 确保内容区域有足够的内边距 */
-.n_pad1 {
-  padding: 1.1rem 0 !important;
-  min-height: 2rem;
-}
-
-/* 覆盖fullpage.js的overflow设置，确保公司页面可以正常滚动 */
-.company-page {
+/* 覆盖fullpage.js的overflow设置，确保新闻页面可以正常滚动 */
+.news-page {
   min-height: 100vh !important;
   overflow-x: hidden !important;
   overflow-y: auto !important;
 }
 
-/* 确保body和html在公司页面时可以滚动 */
-body.company-page-active,
-html.company-page-active {
+/* 确保body和html在新闻页面时可以滚动 */
+body.news-page-active,
+html.news-page-active {
   overflow: visible !important;
   height: auto !important;
 }
@@ -368,11 +360,6 @@ html.company-page-active {
   height: auto !important;
 }
 
-.about {
-  min-height: auto !important;
-  height: auto !important;
-}
-
 /* 覆盖AOS的pointer-events限制，确保导航链接可以点击 */
 .list_sj[data-aos] {
   pointer-events: auto !important;
@@ -380,5 +367,94 @@ html.company-page-active {
 
 .list_sj[data-aos] * {
   pointer-events: auto !important;
+}
+
+/* 新闻页面特定样式 */
+.news-page .n_banner .top h3 {
+  color: #fff;
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.news-page .n_banner .top p {
+  color: #fff;
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+/* 标签页样式 */
+/* .list_sj ul {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+.list_sj ul li {
+  position: relative;
+} */
+
+/* .list_sj ul li a {
+  color: #fff;
+  font-size: 18px;
+  padding: 15px 25px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: block;
+} */
+
+/* .list_sj ul li:not(.on) a {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.list_sj ul li.on a {
+  background: #fff;
+  color: #333;
+  font-weight: bold;
+}
+
+.list_sj ul li a:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.list_sj ul li.on a:hover {
+  background: #fff;
+  transform: translateY(-2px);
+} */
+.list_sj ul li.on a, .list_sj ul li a:hover {
+    background: #284ca7;
+    color: #fff;
+    font-weight: bold;
+}
+.wp {
+    width: 14rem;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 94%;
+}
+/* 移动端样式 */
+@media (max-width: 768px) {
+  .list_sj ul {
+    flex-direction: column;
+    gap: 15px;
+    padding: 0 20px;
+  }
+
+  .list_sj ul li a {
+    text-align: center;
+    padding: 12px 20px;
+  }
+
+  .news-page .n_banner .top h3 {
+    font-size: 32px;
+  }
+
+  .news-page .n_banner .top p {
+    font-size: 16px;
+  }
 }
 </style>

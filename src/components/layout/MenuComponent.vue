@@ -69,7 +69,7 @@ export default {
           href: '#',
           children: [
             { id: 21, title: '新闻中心', href: '#' },
-            { id: 22, title: '国企资讯', href: '#' },
+            { id: 22, title: '', href: '#' },
             { id: 23, title: '公司要闻', href: '#' }
           ]
         },

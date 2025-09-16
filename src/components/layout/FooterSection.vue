@@ -4,7 +4,7 @@
       <div class="foot1 flex">
         <div class="box1">
           <div class="t1">华苏建设有限公司</div>
-          <div class="t2">奉献精品 开创未来</div>
+          <div class="t2">匠心铸精品，智创赢未来</div>
           <div class="share">
             <span class="wx"></span>
             <span class="qq"></span>
@@ -70,7 +70,7 @@ export default {
           title: '华苏动态',
           links: [
             { title: '新闻中心', href: '#', target: '_self' },
-            { title: '国企资讯', href: '#', target: '_self' },
+            { title: '', href: '#', target: '_self' },
             { title: '公司要闻', href: '#', target: '_self' }
           ]
         },

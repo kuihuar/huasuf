@@ -1186,7 +1186,7 @@ section.active.home1 .box1 .tit1::after, section.active.home1 .box3 .tit1::after
 	
 } 
 
-/*建投动态-国企资讯*/
+/*建投动态-*/
 .list20 li{ margin-bottom: .52rem; position: relative; z-index: 1;}
 .list20 li *{ transition: .5s;}
 .list20 li .a{ display: flex; align-items: center; height: 1.48rem; background: #f3f5f9; padding: 0 .4rem 0 .2rem;}
@@ -2182,4 +2182,18 @@ section.active.home1 .box1 .tit1::after, section.active.home1 .box3 .tit1::after
 
 @media(max-width: 768px){	
 	.list_sj{ display: none;}
+}
+
+/* AOS fallback - 确保元素在AOS加载失败时仍然可见 */
+[data-aos] {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* 确保list21内容始终可见 */
+.list21 [data-aos] {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
 }

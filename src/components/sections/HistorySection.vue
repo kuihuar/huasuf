@@ -256,7 +256,7 @@ export default {
         {
           title: '投使命',
           subtitle: 'mission',
-          motto: '奉献精品 开创未来',
+          motto: '匠心铸精品，智创赢未来',
           description: '实施品牌战略，营造时代精品。持续转型升级，持续创新创优，多为社会提供优质产品与服务，推动高质量发展，助力高品质生活。',
           image: '@/assets/images/list12_img2.jpg',
           icon: '@/assets/images/list12_ico2.png',
