@@ -12,7 +12,8 @@ export function getNoticeList(params = {}) {
 // 获取公告详情
 export function getNoticeDetail(id) {
   return request({
-    url: `/notice/${id}`,
+    url: `/notice/GetNoticePublicDetail`,
+    params: { id },
     method: 'get'
   })
 }

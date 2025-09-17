@@ -8,61 +8,18 @@
                         <div class="loading-text">加载中...</div>
                     </div>
 
+
                     <!-- 错误状态 -->
                     <div v-else-if="error" class="error-container">
                         <div class="error-text">{{ error }}</div>
-                        <button @click="loadNotices" class="retry-btn">重试</button>
+                        <button @click="loadNoticeDetail" class="retry-btn">重试</button>
                     </div>
 
-                    <!-- 公告列表 -->
-                    <ul v-else class="list20">
-                        <li v-for="notice in notices" :key="notice.ID" data-aos="fade-up">
-                            <a :href="`/notice/${notice.ID}`" target="_blank" :title="notice.title" class="a">
-                                <div class="time">
-                                    <h3>{{ formatDay(notice.CreatedAt) }}</h3>
-                                    <h6>{{ formatMonth(notice.CreatedAt) }}</h6>
-                                </div>
-                                <div class="con">
-                                    <h4 class="l1 h4s1">{{ notice.title }}</h4>
-                                    <p class="l2 ps2">{{ notice.summary || '' }}</p>
-                                </div>
-                            </a>
-                        </li>
-
-                        <!-- 空状态 -->
-                        <li v-if="notices.length === 0" class="empty-state">
-                            <div class="empty-text">暂无公告信息</div>
-                        </li>
-                    </ul>
-
-                    <!-- 分页 -->
-                    <div v-if="!loading && !error && total > pageSize" class="pagebar">
-                        <span class="p_pages">
-                            <span :class="['p_first', currentPage === 1 ? 'p_fun_d' : 'p_fun']" @click="goToPage(1)">
-                                首页
-                            </span>
-                            <span :class="['p_prev', currentPage === 1 ? 'p_fun_d' : 'p_fun']"
-                                @click="goToPage(currentPage - 1)">
-                                上页
-                            </span>
-
-                            <!-- 页码 -->
-                            <span v-for="page in visiblePages" :key="page"
-                                :class="['p_no', page === currentPage ? 'p_no_d' : '']" @click="goToPage(page)">
-                                {{ page }}
-                            </span>
-
-                            <span :class="['p_next', currentPage === totalPages ? 'p_fun_d' : 'p_fun']"
-                                @click="goToPage(currentPage + 1)">
-                                下页
-                            </span>
-                            <span :class="['p_last', currentPage === totalPages ? 'p_fun_d' : 'p_fun']"
-                                @click="goToPage(totalPages)">
-                                尾页
-                            </span>
-                        </span>
-                        <span class="p_t">共{{ total }}条</span>
+                    <!-- 公告详情 -->
+                    <div v-else>
+                        <div class="empty-text">暂无公告信息</div>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -70,13 +27,13 @@
 </template>
 
 <script>
-import { getNoticeList } from '@/api/notice.js'
+import { getNoticeDetail } from '@/api/notice.js'
 
 export default {
-    name: 'Notifications',
+    name: 'NotificationsDetail',
     data() {
         return {
-            notices: [],
+            notice: {},
             loading: false,
             error: null,
             currentPage: 1,
@@ -108,19 +65,16 @@ export default {
             this.error = null
 
             try {
-                const response = await getNoticeList({
-                    page: this.currentPage,
-                    pageSize: this.pageSize
-                })
+                const response = await getNoticeDetail(this.id)
 
                 if (response.code === 0) {
                     this.notices = response.data.info || []
                     this.total = response.data.total || 0
                 } else {
-                    this.error = response.msg || '获取公告列表失败'
+                    this.error = response.msg || '获取公告详情失败'
                 }
             } catch (err) {
-                console.error('获取公告列表失败:', err)
+                console.error('获取公告详情失败:', err)
                 this.error = '网络错误，请稍后重试'
             } finally {
                 this.loading = false
