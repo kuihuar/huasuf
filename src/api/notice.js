@@ -3,7 +3,7 @@ import request from './request.js'
 // 获取公告列表
 export function getNoticeList(params = {}) {
   return request({
-    url: '/notice',
+    url: '/notice/GetNoticePublicList',
     method: 'get',
     params
   })
