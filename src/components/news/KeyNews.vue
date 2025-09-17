@@ -2,9 +2,20 @@
     <div class="center-news">
       <div class="wp">
         <div class="news-content">
+        <!-- 加载状态 -->
+        <div v-if="loading" class="loading">
+          <p>正在加载新闻...</p>
+        </div>
+        
+        <!-- 错误状态 -->
+        <div v-else-if="error" class="error">
+          <p>{{ error }}</p>
+          <button @click="loadData" class="retry-btn">重试</button>
+        </div>
+        
           <!-- 新闻列表 -->
-          <div class="news-list">
-            <div class="news-item" v-for="(news, index) in newsList" :key="index" data-aos="fade-up" :data-aos-delay="index * 100">
+        <div v-else class="news-list">
+            <div class="news-item" v-for="(news, index) in newsList" :key="index" data-aos="fade-up">
               <div class="news-image">
                 <img :src="news.image" :alt="news.title" />
                 <div class="news-date">
@@ -26,7 +37,7 @@
           </div>
   
           <!-- 分页 -->
-          <div class="pagination" data-aos="fade-up">
+        <div class="pagination" v-if="!loading && !error && totalPages > 1" >
             <a href="#" class="prev" :class="{ disabled: currentPage === 1 }" @click.prevent="prevPage">
               <i class="icon-left"></i> 上一页
             </a>
@@ -47,13 +58,42 @@
   </template>
   
   <script>
+import { getNewsList } from '@/api/news.js'
+import { API_CONFIG } from '@/config/api.js'
+
   export default {
     name: 'KeyNews',
     data() {
       return {
+      loading: false,
+      error: null,
         currentPage: 1,
+      pageSize: 2, // 每页显示数量
         totalPages: 5,
-        newsList: [
+      totalCount: 0, // 总数据量
+      newsList: [] // 初始为空数组
+    }
+  },
+  computed: {
+    visiblePages() {
+      const pages = []
+      const start = Math.max(1, this.currentPage - 2)
+      const end = Math.min(this.totalPages, this.currentPage + 2)
+      
+      for (let i = start; i <= end; i++) {
+        pages.push(i)
+      }
+      return pages
+    }
+  },
+  // 添加生命周期钩子
+  async mounted() {
+    await this.loadData()
+  },
+  methods: {
+    // 获取默认新闻数据
+    getDefaultNews() {
+      return [
           {
             title: '华苏建设荣获2024年度优秀建筑企业称号',
             summary: '在2024年度建筑行业评选中，华苏建设凭借卓越的项目质量和创新技术，荣获优秀建筑企业称号，这是对公司多年来努力的最好认可。',
@@ -115,36 +155,134 @@
             link: '#'
           }
         ]
-      }
     },
-    computed: {
-      visiblePages() {
-        const pages = []
-        const start = Math.max(1, this.currentPage - 2)
-        const end = Math.min(this.totalPages, this.currentPage + 2)
+    
+    // 获取分页后的默认数据
+    getPaginatedDefaultNews() {
+      const allNews = this.getDefaultNews()
+      const startIndex = (this.currentPage - 1) * this.pageSize
+      const endIndex = startIndex + this.pageSize
+      return allNews.slice(startIndex, endIndex)
+    },
+    
+    // 转换API数据格式为组件需要的格式
+    transformNewsData(apiData) {
+      return apiData.map(item => {
+        // 解析发布时间
+        const publishDate = new Date(item.publishtime)
+        const day = publishDate.getDate().toString().padStart(2, '0')
+        const month = `${publishDate.getMonth() + 1}月`
         
-        for (let i = start; i <= end; i++) {
-          pages.push(i)
+        return {
+          title: item.title,
+          summary: item.summary,
+          image: item.cover ? API_CONFIG.BASE_URL + `${item.cover}` : '/src/assets/images/news1.jpg', // 处理图片路径
+          category: item.category,
+          views: item.views || 0,
+          day: day,
+          month: month,
+          link: item.link || '#',
+          author: item.author,
+          like: item.like || 0,
+          dislike: item.dislike || 0,
+          publishTime: item.publishtime,
+          status: item.status
         }
-        return pages
+      })
+    },
+    
+    async loadData() {
+      try {
+        this.loading = true
+        this.error = null
+        
+        // 构建分页参数
+        const params = {
+          page: this.currentPage,
+          pageSize: this.pageSize
+        }
+        
+        console.log('KeyNews 请求参数:', params)
+        
+        // 加载新闻数据
+        const newsResponse = await getNewsList(params)
+        
+        console.log('KeyNews 接口响应:', newsResponse)
+        
+        // 检查响应状态
+        if (newsResponse && newsResponse.code === 0) {
+          // 成功响应
+          const responseData = newsResponse.data
+          
+          if (responseData && responseData.info && Array.isArray(responseData.info)) {
+            // 转换数据格式
+            this.newsList = this.transformNewsData(responseData.info)
+            
+            // 更新分页信息
+            if (responseData.total !== undefined) {
+              this.totalCount = responseData.total
+              this.totalPages = Math.ceil(this.totalCount / this.pageSize)
+            }
+            
+            console.log('KeyNews 数据加载成功:', this.newsList.length, '条')
+            console.log('KeyNews 分页信息 - 当前页:', this.currentPage, '总页数:', this.totalPages, '总数据:', this.totalCount)
+          } else {
+            console.warn('KeyNews 响应数据格式不正确，使用默认数据')
+            this.useDefaultData()
+          }
+        } else {
+          // 接口返回错误
+          const errorMsg = newsResponse?.msg || '接口返回错误'
+          console.error('KeyNews 接口错误:', errorMsg)
+          this.error = errorMsg
+          this.useDefaultData()
+        }
+        
+        // 如果数据为空，使用默认数据
+        if (this.newsList.length === 0) {
+          console.warn('KeyNews 接口返回空数据，使用默认数据')
+          this.useDefaultData()
+        }
+        
+      } catch (error) {
+        console.error('KeyNews 加载数据失败:', error)
+        this.error = error.message || '数据加载失败'
+        // 使用默认数据
+        this.useDefaultData()
+        console.log('KeyNews 已切换到默认数据')
+      } finally {
+        this.loading = false
       }
     },
-    methods: {
+    
+    // 使用默认数据并设置正确的分页信息
+    useDefaultData() {
+      const allDefaultNews = this.getDefaultNews()
+      this.totalCount = allDefaultNews.length
+      this.totalPages = Math.ceil(this.totalCount / this.pageSize)
+      this.newsList = this.getPaginatedDefaultNews()
+      
+      console.log('KeyNews 使用默认数据 - 总数据:', this.totalCount, '总页数:', this.totalPages, '当前页:', this.currentPage)
+    },
+    
       goToPage(page) {
         if (page >= 1 && page <= this.totalPages) {
           this.currentPage = page
+        this.loadData() // 重新加载数据
           this.scrollToTop()
         }
       },
       prevPage() {
         if (this.currentPage > 1) {
           this.currentPage--
+        this.loadData() // 重新加载数据
           this.scrollToTop()
         }
       },
       nextPage() {
         if (this.currentPage < this.totalPages) {
           this.currentPage++
+        this.loadData() // 重新加载数据
           this.scrollToTop()
         }
       },
@@ -331,6 +469,27 @@
     color: #fff;
     border-color: #007bff;
   }
+
+/* 新增样式 */
+.loading, .error {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+.retry-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.retry-btn:hover {
+  background: #0056b3;
+}
   
   /* 移动端样式 */
   @media (max-width: 768px) {

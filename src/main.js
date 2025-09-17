@@ -22,34 +22,45 @@ const app = createApp(App)
 app.use(router)
 
 // 改进的 AOS 库加载和初始化
-async function initializeAOS() {
-  try {
-    // 动态导入 AOS 库
-    const aosModule = await import('./assets/js/animate.js')
-    
-    // 等待更长时间确保 AOS 完全加载
-    await new Promise(resolve => setTimeout(resolve, 100))
-    
-    // 多种方式检查 AOS 是否可用
-    if (window.AOS || (aosModule && aosModule.default)) {
-      const AOS = window.AOS || aosModule.default
-      
-      AOS.init({
-        duration: 1000,
+function initializeAOS() {
+  return new Promise((resolve) => {
+    // 检查 AOS 是否已经加载
+    if (window.AOS) {
+      window.AOS.init({
+        duration: 10000,
         once: true,
         offset: 100,
-        disable: false // 不禁用移动端
+        disable: false
       })
       console.log('AOS initialized successfully')
-      return true
-    } else {
-      console.warn('AOS not found, using fallback')
-      return false
+      resolve(true)
+      return
     }
-  } catch (error) {
-    console.error('Failed to load AOS:', error)
-    return false
-  }
+    
+    // 如果 AOS 未加载，创建 script 标签加载
+    const script = document.createElement('script')
+    script.src = './src/assets/js/animate.js'
+    script.onload = () => {
+      if (window.AOS) {
+        window.AOS.init({
+          duration: 1000,
+          once: true,
+          offset: 100,
+          disable: false
+        })
+        console.log('AOS initialized successfully')
+        resolve(true)
+      } else {
+        console.warn('AOS not found after loading')
+        resolve(false)
+      }
+    }
+    script.onerror = () => {
+      console.error('Failed to load AOS script')
+      resolve(false)
+    }
+    document.head.appendChild(script)
+  })
 }
 
 // 挂载应用

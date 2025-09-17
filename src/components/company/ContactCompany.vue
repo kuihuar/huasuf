@@ -1,142 +1,41 @@
 <template>
-  <div class="contact-company">
-    <div class="container">
-      <div class="page-header">
-        <h1>联系华苏</h1>
-        <p class="subtitle">携手合作，共创未来</p>
-      </div>
-      
-      <div class="content-section">
-        <div class="contact-grid">
-          <div class="contact-info">
-            <h2>联系方式</h2>
-            <div class="info-list">
-              <div class="info-item">
-                <div class="info-icon">
-                  <i class="icon-location"></i>
-                </div>
-                <div class="info-content">
-                  <h3>公司地址</h3>
-                  <p>山西省太原市迎泽区新建南路15号</p>
-                </div>
-              </div>
-              
-              <div class="info-item">
-                <div class="info-icon">
-                  <i class="icon-phone"></i>
-                </div>
-                <div class="info-content">
-                  <h3>联系电话</h3>
-                  <p>0351-1234567</p>
-                  <p>400-888-9999</p>
-                </div>
-              </div>
-              
-              <div class="info-item">
-                <div class="info-icon">
-                  <i class="icon-email"></i>
-                </div>
-                <div class="info-content">
-                  <h3>电子邮箱</h3>
-                  <p>info@huasujianshe.com</p>
-                  <p>hr@huasujianshe.com</p>
-                </div>
-              </div>
-              
-              <div class="info-item">
-                <div class="info-icon">
-                  <i class="icon-website"></i>
-                </div>
-                <div class="info-content">
-                  <h3>官方网站</h3>
-                  <p>www.huasujianshe.com</p>
+  <section class="n_container">
+    <section class="contact">
+      <div class="fl01">
+        <div class="wp">
+          <!-- <div class="content flex">
+
+          </div> -->
+          <div class="left" data-aos="fade-right">
+              <div class="img_box">
+                <div class="img slow img_zd">
+                  <div class="img_hezi" style=" background: url(../images/contact_img1.jpg);"></div>
+                  <img src="../images/contact_img1.jpg" class="none" />
+
                 </div>
               </div>
             </div>
-          </div>
-          
-          <div class="contact-form">
-            <h2>在线留言</h2>
-            <form @submit.prevent="submitForm">
-              <div class="form-group">
-                <label for="name">姓名 *</label>
-                <input type="text" id="name" v-model="form.name" required>
-              </div>
-              
-              <div class="form-group">
-                <label for="company">公司名称</label>
-                <input type="text" id="company" v-model="form.company">
-              </div>
-              
-              <div class="form-group">
-                <label for="phone">联系电话 *</label>
-                <input type="tel" id="phone" v-model="form.phone" required>
-              </div>
-              
-              <div class="form-group">
-                <label for="email">电子邮箱 *</label>
-                <input type="email" id="email" v-model="form.email" required>
-              </div>
-              
-              <div class="form-group">
-                <label for="subject">咨询主题</label>
-                <select id="subject" v-model="form.subject">
-                  <option value="">请选择</option>
-                  <option value="business">商务合作</option>
-                  <option value="recruitment">人才招聘</option>
-                  <option value="project">项目咨询</option>
-                  <option value="other">其他</option>
-                </select>
-              </div>
-              
-              <div class="form-group">
-                <label for="message">留言内容 *</label>
-                <textarea id="message" v-model="form.message" rows="5" required></textarea>
-              </div>
-              
-              <button type="submit" class="submit-btn">提交留言</button>
-            </form>
-          </div>
-        </div>
-        
-        <div class="map-section">
-          <h2>公司位置</h2>
-          <div class="map-container">
-            <div class="map-placeholder">
-              <i class="icon-map"></i>
-              <p>地图加载中...</p>
+            <div class="right" data-aos="fade-left">
+              <h3>华苏建设有限公司</h3>
+              <ul class="list19">
+                <li><img src="@/assets/images/ksdh-icon1.png"  class="img_vsb_content">
+                  <p>公司地址: 山西XXXX路8号</p>
+                </li>
+                <li><img src="@/assets/images/ksdh-icon1.png"  class="img_vsb_content">
+                  <p>邮政编码: 030032</p>
+                </li>
+                <li><img src="@/assets/images/ksdh-icon1.png"  class="img_vsb_content">
+                  <p>联系电话: 0351-00000000</p>
+                </li>
+                <li><img src="@/assets/images/ksdh-icon1.png"  class="img_vsb_content">
+                  <p>电子邮箱: <a href="mailto:info@hsjs.com">info@hsjs.com</a> </p>
+                </li>
+              </ul>
             </div>
-          </div>
-        </div>
-        
-        <div class="departments-section">
-          <h2>主要部门联系方式</h2>
-          <div class="departments-grid">
-            <div class="department-item">
-              <h3>市场部</h3>
-              <p>电话：0351-1234567</p>
-              <p>邮箱：market@huasujianshe.com</p>
-            </div>
-            <div class="department-item">
-              <h3>人力资源部</h3>
-              <p>电话：0351-1234568</p>
-              <p>邮箱：hr@huasujianshe.com</p>
-            </div>
-            <div class="department-item">
-              <h3>技术部</h3>
-              <p>电话：0351-1234569</p>
-              <p>邮箱：tech@huasujianshe.com</p>
-            </div>
-            <div class="department-item">
-              <h3>财务部</h3>
-              <p>电话：0351-1234570</p>
-              <p>邮箱：finance@huasujianshe.com</p>
-            </div>
-          </div>
         </div>
       </div>
-    </div>
-  </div>
+    </section>
+  </section>
 </template>
 
 <script>
@@ -210,7 +109,7 @@ export default {
   background: white;
   border-radius: 15px;
   padding: 60px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
 .contact-grid {
@@ -245,7 +144,7 @@ export default {
 
 .info-item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .info-icon {
@@ -384,7 +283,7 @@ export default {
 
 .department-item:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .department-item h3 {
@@ -404,20 +303,20 @@ export default {
   .page-header h1 {
     font-size: 2rem;
   }
-  
+
   .content-section {
     padding: 30px;
   }
-  
+
   .contact-grid {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  
+
   .contact-form {
     padding: 30px;
   }
-  
+
   .departments-grid {
     grid-template-columns: 1fr;
   }

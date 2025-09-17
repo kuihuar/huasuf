@@ -11,10 +11,10 @@
             <span class="wb"></span>
           </div>
           <div class="btn">
-            <a href="#">
+            <router-link to="/company/about">
               了解更多
               <span class="icon"></span>
-            </a>
+            </router-link>
           </div>
         </div>
         
@@ -22,7 +22,7 @@
           <dl v-for="(group, index) in linkGroups" :key="index">
             <dt>{{ group.title }}</dt>
             <dd v-for="(link, linkIndex) in group.links" :key="linkIndex">
-              <a :href="link.href" :target="link.target">{{ link.title }}</a>
+              <router-link :to="link.href" :target="link.target">{{ link.title }}</router-link>
             </dd>
           </dl>
         </div>
@@ -60,34 +60,34 @@ export default {
         {
           title: '关于华苏',
           links: [
-            { title: '集团简介', href: '#company', target: '_self' },
-            // { title: '组织架构', href: '#', target: '_self' },
-            { title: '集团荣誉', href: '#honor', target: '_self' },
-            { title: '联系华苏', href: '#contact', target: '_self' }
+
+          { id: 11, title: '集团简介', href: "/company/about" },
+          { id: 13, title: '集团荣誉', href: "/company/honor" },
+          { id: 14, title: '联系华苏', href: "/company/contact" }
           ]
         },
         {
           title: '华苏动态',
           links: [
-            { title: '新闻中心', href: '#', target: '_self' },
-            { title: '', href: '#', target: '_self' },
-            { title: '公司要闻', href: '#', target: '_self' }
+            { title: '新闻中心', href: "/news/center" },
+            { title: '国际资讯', href: "/news/corporate" },
+            { title: '公司要闻', href: "/news/company" }
           ]
         },
-        {
-          title: '全产业链服务',
-          links: [
-            { title: '三大支柱', href: '#', target: '_self' },
-            { title: '六大支撑', href: '#', target: '_self' }
-          ]
-        },
+        // {
+        //   title: '全产业链服务',
+        //   links: [
+        //     { title: '三大支柱', href: '#', target: '_self' },
+        //     { title: '六大支撑', href: '#', target: '_self' }
+        //   ]
+        // },
         {
           title: '科技创新',
           links: [
-            { title: '科技成果', href: '#', target: '_self' },
-            { title: '创新体系', href: '#', target: '_self' },
-            { title: '成果推广', href: '#', target: '_self' },
-            { title: '科技动态', href: '#', target: '_self' }
+            { title: '科技成果', href: "/tech/achievements" },
+            { title: '创新体系', href: "/tech/innovation" },
+            { title: '成果推广', href: "/tech/promotion" },
+            { title: '科技动态', href: "/tech/application" }
           ]
         }
       ]

@@ -1,19 +1,19 @@
 <template>
-    <div class="learning-special">
+    <div class="development-history">
         <div class="wp">
-            <h2>学习专栏</h2>
+            <h2>发展历程</h2>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'LearningSpecial'
+    name: 'DevelopmentHistory'
 }
 </script>
 
 <style scoped>
-.learning-special {
+.development-history {
     padding: 100px 0;
 }
 </style>

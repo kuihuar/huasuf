@@ -1,19 +1,19 @@
 <template>
-    <div class="learning-special">
+    <div class="major-event">
         <div class="wp">
-            <h2>学习专栏</h2>
+            <h2>重大事项</h2>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'LearningSpecial'
+    name: 'MajorEvents'
 }
 </script>
 
 <style scoped>
-.learning-special {
+.major-event {
     padding: 100px 0;
 }
 </style>

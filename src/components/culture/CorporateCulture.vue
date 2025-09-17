@@ -1,19 +1,19 @@
 <template>
-    <div class="learning-special">
+    <div class="corporate-culture">
         <div class="wp">
-            <h2>学习专栏</h2>
+            <h2>企业文化</h2>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'LearningSpecial'
+    name: 'CorporateCulture'
 }
 </script>
 
 <style scoped>
-.learning-special {
+.corporate-culture {
     padding: 100px 0;
 }
 </style>

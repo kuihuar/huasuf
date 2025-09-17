@@ -142,10 +142,10 @@ export default {
           description: '山西投连年入选"中国企业500强"',
           content: '展望未来，山西投将在省委省政府的正确领导下，进一步深化体制机制改革，持续创新商业模式，完善现代企业治理体系，深入推进内涵集约式发展，促进经营规模和经济效益持续稳健增长。',
           children: [
-            { id: 51, title: '科技成果', href: '#' },
-            { id: 52, title: '创新体系', href: '#' },
-            { id: 53, title: '成果推广', href: '#' },
-            { id: 54, title: '科技动态', href: '#' }
+            { id: 51, title: '科技成果', href: '/tech/achievements' },
+            { id: 52, title: '创新体系', href: '/tech/innovation' },
+            { id: 53, title: '成果推广', href: '/tech/promotion' },
+            { id: 54, title: '科技动态', href: '/tech/application' }
           ]
         },
         {
@@ -155,8 +155,8 @@ export default {
           description: '促进经营规模和经济效益持续稳健增长',
           content: '打造集投资、设、运营为一体的"全产业链"筑业龙头企业，向国内领先、国际知名、具有较强竞争力的"大设"集团迈进，全力冲刺"世界500强"。',
           children: [
-            { id: 61, title: '投文化', href: '#' },
-            { id: 62, title: '发展历程', href: '#' }
+            { id: 61, title: '企业文化', href: '/culture/corporate' },
+            { id: 62, title: '发展历程', href: '/culture/history' }
           ]
         },
         {
@@ -166,9 +166,9 @@ export default {
           description: '进一步深化体制机制改革',
           content: '近年来，在省委省政府坚强领导和大力支持下，山西投抢抓我省国资国企改革历史机遇，大刀阔斧推进改革改制与资产重组，解决了多年久拖不决的诸多难题，资产负债率大幅下降，资本状况显著改善。',
           children: [
-            { id: 71, title: '学习宣传', href: '#' },
-            { id: 72, title: '市场开拓', href: '#' },
-            { id: 73, title: '质量安全', href: '#' }
+            { id: 71, title: '学习宣传', href: '/specialcolumn/learning' },
+            { id: 72, title: '市场开拓', href: '/specialcolumn/market' },
+            { id: 73, title: '质量安全', href: '/specialcolumn/quality' }
           ]
         },
         {
@@ -178,9 +178,9 @@ export default {
           description: '匠心铸精品，智创赢未来',
           content: '华苏建设有限公司（以下简称"华苏建设"）系山西省规模最大的综合性国有投资设集团。其前身为中央人民政府工部太原工程局、国家工部华北工程管理局、国家工部和国家委第八工程局，组于1953年，1970年下放山西，改称山西省筑工程管理局。',
           children: [
-            { id: 81, title: '通知公告', href: '#' },
-            { id: 82, title: '重大事项', href: '#' },
-            { id: 83, title: '人才招聘', href: '#' }
+            { id: 81, title: '通知公告', href: '/information/notifications' },
+            { id: 82, title: '重大事项', href: '/information/events' },
+            { id: 83, title: '人才招聘', href: '/information/talent' }
           ]
         }
       ]

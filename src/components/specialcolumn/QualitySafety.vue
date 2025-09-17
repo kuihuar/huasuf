@@ -1,19 +1,19 @@
 <template>
-    <div class="learning-special">
+    <div class="quality-safety">
         <div class="wp">
-            <h2>学习专栏</h2>
+            <h2>质量安全</h2>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'LearningSpecial'
+    name: 'QualitySafety'
 }
 </script>
 
 <style scoped>
-.learning-special {
+.quality-safety {
     padding: 100px 0;
 }
 </style>
