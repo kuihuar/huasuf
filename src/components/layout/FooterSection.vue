@@ -61,13 +61,13 @@ export default {
           title: '关于华苏',
           links: [
 
-          { id: 11, title: '集团简介', href: "/company/about" },
-          { id: 13, title: '集团荣誉', href: "/company/honor" },
-          { id: 14, title: '联系华苏', href: "/company/contact" }
+          { id: 11, title: '公司简介', href: "/company/about" },
+          { id: 13, title: '公司荣誉', href: "/company/honor" },
+          { id: 14, title: '联系我们', href: "/company/contact" }
           ]
         },
         {
-          title: '华苏动态',
+          title: '公司动态',
           links: [
             { title: '新闻中心', href: "/news/center" },
             { title: '国际资讯', href: "/news/corporate" },
