@@ -3,7 +3,7 @@
     <!-- 桌面端导航 -->
     <div class="nav_box white">
       <div class="nav_wrap fix">
-        <h1 class="l logo" id="logo">
+        <h1 class="l logo" id="logo" @click="goToHome">
           <img src="@/assets/images/logo_w.png" alt="华苏建设有限公司">  
           <router-link to="/" style="display: inline;color: #ffffff;">华苏建设有限公司</router-link>
         </h1>
@@ -187,6 +187,16 @@ export default {
     }
   },
   methods: {
+    goToHome() {
+      // 如果当前已经在首页，直接重新加载页面
+      if (this.$route.path === '/') {
+        window.location.reload()
+        return
+      }
+      
+      // 如果不在首页，跳转到首页（路由守卫会处理重新加载）
+      this.$router.push('/')
+    },
     handleSearch() {
       if (this.searchKeyword.trim()) {
         console.log('搜索关键词:', this.searchKeyword)

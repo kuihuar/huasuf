@@ -171,6 +171,17 @@ router.beforeEach((to, from, next) => {
     document.title = to.meta.title + ' - 华苏建设有限公司'
   }
   
+  // 如果切换到首页，重新加载页面以确保FullPage.js正确初始化
+  if (to.path === '/' && from.path !== '/') {
+    console.log('Switching to home page, reloading...')
+    next()
+    // 延迟重新加载，确保路由切换完成
+    setTimeout(() => {
+      window.location.reload()
+    }, 100)
+    return
+  }
+  
   next()
 })
 
