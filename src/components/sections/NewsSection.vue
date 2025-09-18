@@ -91,8 +91,8 @@
                   </div>
                 </div>
                 <div class="con">
-                  <h6>{{ news.date }}</h6>
-                  <h4 class="l1 h4s1">{{ news.title }}</h4>
+                  <!-- <h6>{{ news.date }}</h6> -->
+                  <!-- <h4 class="l1 h4s1">{{ news.summary }}</h4> -->
                 </div>
               </a>
             </li>
