@@ -5,8 +5,8 @@
         <!-- 新闻中心 -->
         <div class="box box1 miso_up">
           <div class="tit1 tit1_line">
-            <big>新闻中心</big>
-            <a href="#" class="more1">更多+</a>
+            <span class="big">新闻中心</span>
+            <router-link to="/news/center" class="more1">更多+</router-link>
           </div>
           <section class="list2_box swiper-container">
             <ul class="list2 list00 swiper-wrapper">
@@ -46,8 +46,8 @@
         <!-- 公司要闻 -->
         <div class="box box2 miso_up">
           <div class="tit1 tit1_line">
-            <big>公司要闻</big>
-            <a href="#" class="more1">更多+</a>
+            <span class="big">公司要闻</span>
+            <router-link to="/news/key" class="more1">更多+</router-link>
           </div>
           <ul class="list3">
             <li v-for="(news, index) in companyNews" :key="index">
@@ -59,11 +59,11 @@
           </ul>
         </div>
 
-        <!--  -->
+        <!-- 国际资讯 -->
         <div class="box box3 miso_up">
           <div class="tit1 tit1_line">
-            <big></big>
-            <a href="#" class="more1">更多+</a>
+            <span class="big">国际资讯</span>
+            <router-link to="/news/corporate" class="more1">更多+</router-link>
           </div>
           <ul class="list4 list00">
             <li v-for="(news, index) in stateNews" :key="index">

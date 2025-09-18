@@ -62,66 +62,39 @@ export default {
       fullpageInstance: null,
       isInitialized: false,
       initRetryCount: 0,
-      maxRetries: 3,
-      isRouteReady: false
+      maxRetries: 3
     }
   },
   mounted() {
-    console.log('HomePage mounted, current hash:', window.location.hash)
+    console.log('HomePage mounted, initializing fullpage...')
     this.initializePage()
-  },
-  beforeDestroy() {
-    this.destroyFullpage()
   },
   activated() {
     // 处理keep-alive组件激活
     console.log('HomePage activated')
     this.initializePage()
   },
+  beforeDestroy() {
+    console.log('HomePage beforeDestroy, cleaning up...')
+    this.destroyFullpage()
+  },
   deactivated() {
     // 处理keep-alive组件停用
     console.log('HomePage deactivated')
     this.destroyFullpage()
   },
-  watch: {
-    // 监听路由变化
-    '$route'(to, from) {
-      console.log('Route changed from', from.path, 'to', to.path)
-      this.isRouteReady = true
-      // 路由变化后重新初始化
-      this.$nextTick(() => {
-        this.initializePage()
-      })
-    }
-  },
   methods: {
     async initializePage() {
-      console.log('Initializing page, hash:', window.location.hash)
-      
       // 确保DOM完全渲染
       await this.$nextTick()
       
-      // 检查是否是直接访问 #/ 的情况
-      const hash = window.location.hash
-      const isDirectHashAccess = hash === '#/' || hash === '#'
-      
-      if (isDirectHashAccess) {
-        console.log('Direct hash access detected, using longer delay')
-        // 直接访问 #/ 时使用更长的延迟
-        setTimeout(() => {
-          this.initFullpage()
-        }, 1000)
-      } else {
-        // 正常路由跳转使用较短延迟
-        setTimeout(() => {
-          this.initFullpage()
-        }, 500)
-      }
+      // 添加额外延迟确保所有子组件都已挂载
+      setTimeout(() => {
+        this.initFullpage()
+      }, 200)
     },
     initFullpage() {
       console.log('Attempting to initialize fullpage.js...')
-      console.log('Current hash:', window.location.hash)
-      console.log('Current pathname:', window.location.pathname)
       
       // 检查屏幕宽度
       if (window.innerWidth < 1200) {
@@ -144,13 +117,14 @@ export default {
       
       try {
         this.fullpageInstance = new fullpage('#fullpage', {
-          licenseKey: 'gplv3-license', // 使用GPL v3许可证（开源版本）
+          licenseKey: 'YOUR_KEY_HERE',
           anchors: ["f0", "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8"],
           recordHistory: false, // 禁用历史记录
           updateHash: false,    // 禁用hash更新
           scrollingSpeed: 1000,
-          fitToSectionDelay: 1000, // 减少延迟
+          fitToSectionDelay: 2000,
           css3: true,
+          // 完全禁用所有历史记录相关功能
           autoScrolling: true,
           scrollBar: false,
           easing: 'easeInOutCubic',
@@ -164,9 +138,10 @@ export default {
           touchSensitivity: 15,
           keyboardScrolling: true,
           animateAnchor: true,
-          // 简化回调函数
+          // 禁用所有可能影响历史记录的功能
           onLeave: (origin, destination, direction) => {
             console.log('Leaving section:', origin.index, 'Going to:', destination.index)
+            // 阻止默认行为，避免影响路由
             return true
           },
           afterLoad: (origin, destination, direction) => {
@@ -185,12 +160,20 @@ export default {
             console.log('Fullpage.js rendered successfully')
             this.isInitialized = true
             this.initRetryCount = 0
-            // 在渲染完成后处理URL锚点
-            this.handleUrlAnchor()
+          },
+          // 添加错误处理
+          onSlideLeave: (section, origin, destination, direction) => {
+            return true
+          },
+          afterSlideLoad: (section, origin, destination, direction) => {
+            // 处理slide加载
           }
         })
         
         console.log('Fullpage.js instance created successfully')
+        
+        // 处理URL锚点
+        this.handleUrlAnchor()
         
       } catch (error) {
         console.error('Error initializing fullpage.js:', error)
@@ -200,10 +183,10 @@ export default {
     retryInit() {
       if (this.initRetryCount < this.maxRetries) {
         this.initRetryCount++
-        console.log(`Retrying fullpage.js initialization (${this.initRetryCount}/${this.maxRetries})...`)
+        console.log(`Retrying fullpage initialization (${this.initRetryCount}/${this.maxRetries})...`)
         setTimeout(() => {
           this.initFullpage()
-        }, 1000)
+        }, 500 * this.initRetryCount)
       } else {
         console.error('Max retries reached, fullpage.js initialization failed')
         this.isInitialized = false
@@ -212,16 +195,15 @@ export default {
     handleUrlAnchor() {
       // 检查当前URL的hash部分
       const hash = window.location.hash
-      console.log('Handling URL anchor, current hash:', hash)
+      console.log('Current hash:', hash)
       console.log('Current path:', window.location.pathname)
       
-      if (hash && hash.startsWith('#')) {
-        let anchor = hash.substring(1) // 移除 '#' 前缀
+      if (hash && hash.startsWith('#/')) {
+        let anchor = hash.substring(2) // 移除 '#/' 前缀
         
-        // 如果anchor为空（即URL是 #），则跳转到第一个section
+        // 如果anchor为空（即URL是 #/），则跳转到第一个section
         if (anchor === '') {
           anchor = 'f0'
-          console.log('Empty anchor detected, setting to f0')
         }
         
         const validAnchors = ["f0", "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8"]
@@ -233,28 +215,12 @@ export default {
             if (window.fullpage_api && this.isInitialized) {
               try {
                 window.fullpage_api.moveTo(anchor)
-                console.log('Successfully moved to anchor:', anchor)
               } catch (error) {
                 console.warn('Error moving to anchor:', error)
               }
-            } else {
-              console.warn('Fullpage API not available or not initialized')
             }
-          }, 1500) // 增加延迟时间
+          }, 1000)
         }
-      } else {
-        // 没有hash，直接跳转到第一个section
-        console.log('No hash detected, moving to first section')
-        setTimeout(() => {
-          if (window.fullpage_api && this.isInitialized) {
-            try {
-              window.fullpage_api.moveTo('f0')
-              console.log('Successfully moved to first section (no hash)')
-            } catch (error) {
-              console.warn('Error moving to first section (no hash):', error)
-            }
-          }
-        }, 1500)
       }
     },
     destroyFullpage() {
@@ -270,13 +236,19 @@ export default {
         } catch (error) {
           console.warn('Error destroying fullpage.js:', error)
         }
+        this.fullpageInstance = null
+        window.fullpage_api = null
+        this.isInitialized = false
       }
-      this.fullpageInstance = null
-      this.isInitialized = false
     },
     triggerCountUp() {
-      // 数字动画逻辑
-      console.log('Triggering count up animation')
+      // 触发数字动画
+      const numbers = document.querySelectorAll('.number')
+      numbers.forEach(number => {
+        if (number.textContent) {
+          console.log('触发数字动画:', number.textContent)
+        }
+      })
     }
   }
 }
@@ -284,63 +256,48 @@ export default {
 
 <style scoped>
 .home-page {
-  height: 100vh;
-  overflow: hidden;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  position: relative;
 }
 
+/* 确保内容可见 */
 #fullpage {
-  height: 100vh;
+  position: relative;
+  z-index: 1;
 }
 
-/* 确保每个section占满屏幕 */
-#fullpage .fp-section {
-  height: 100vh !important;
+/* 修复轮播图显示问题 */
+.main-visual-slider {
+  background-color: transparent !important;
 }
 
-/* 返回顶部按钮 */
-.gotop {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 50px;
-  height: 50px;
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 1000;
+.main-visual-slider .swiper-slide::after {
+  opacity: 0.3;
 }
 
-.gotop:hover {
-  background: rgba(0, 0, 0, 0.7);
-  transform: translateY(-2px);
+.main-visual-slider .overlay {
+  opacity: 0.2 !important;
 }
 
-.gotop.hide {
-  opacity: 0;
-  visibility: hidden;
+.visual-img img {
+  object-fit: cover !important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
-.gotop i {
-  color: white;
-  font-size: 1.2rem;
-}
-
-/* 响应式设计 */
-@media (max-width: 1200px) {
+/* 确保在没有 fullpage.js 时内容仍然可见 */
+@media (max-width: 1199px) {
   .home-page {
-    height: auto;
+    overflow: auto;
   }
   
   #fullpage {
-    height: auto;
+    display: block !important;
   }
   
-  #fullpage .fp-section {
-    height: auto !important;
+  #fullpage > * {
+    display: block !important;
     min-height: 100vh;
   }
 }

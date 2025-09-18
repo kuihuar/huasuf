@@ -106,7 +106,7 @@ export default {
           description: '立足山西 布局全国 开拓海外',
           content: '山西投现辖56个全资、控股和参股子公司，其中上市公司2家；职工总数3.5万余人，其中各类经营管理和专业技术人才2.7万余人；拥有7个筑、3个市政公用、1个石油化工，共11项工程施工总承包特级资质。',
           children: [
-            { id: 21, title: '新闻中心', href: "/news" },
+            { id: 21, title: '新闻中心', href: "/news/center" },
             { id: 22, title: '国际资讯', href: "/news/corporate" },
             { id: 23, title: '公司要闻', href: "/news/key" }
           ]

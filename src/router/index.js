@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/views/HomePage.vue'
 import Company from '@/views/Company.vue'
 import News from '@/views/News.vue'
@@ -8,8 +8,6 @@ import Specialcolumn from '@/views/Specialcolumn.vue'
 import Information from '@/views/Information.vue'
 
 const routes = [
-  // 添加重定向规则：将 /#/ 重定向到 /
-
   {
     path: '/',
     name: 'Home',
@@ -152,7 +150,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
   scrollBehavior(to, from, savedPosition) {
     // 确保页面切换时滚动到顶部
@@ -167,13 +165,6 @@ const router = createRouter({
 // 路由守卫
 router.beforeEach((to, from, next) => {
   console.log('Router navigating from', from.path, 'to', to.path)
-  
-  // 处理 /#/ 的情况，重定向到 /
-  // if (to.path === '/' && window.location.hash === '#/') {
-  //   console.log('Redirecting from /#/ to /')
-  //   window.location.replace(window.location.origin + '/')
-  //   return
-  // }
   
   // 设置页面标题
   if (to.meta.title) {
