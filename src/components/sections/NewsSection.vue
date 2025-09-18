@@ -21,12 +21,16 @@
                       <div>
                         <svg class="icon_svg mwl_arrow default" aria-hidden="true">
                           <svg viewBox="0 0 27 19" id="icon_mwl_arrow">
-                            <path fill-rule="evenodd" d="M26.803,3.291 C26.802,3.293 26.803,3.296 26.803,3.298 L24.997,9.807 C24.954,10.011 24.836,10.170 24.678,10.264 C24.519,10.359 24.316,10.387 24.115,10.324 C23.714,10.200 23.457,9.766 23.542,9.360 L24.825,4.733 L1.373,18.726 C1.029,18.931 0.569,18.792 0.342,18.415 C0.116,18.038 0.211,17.568 0.555,17.363 L24.022,3.362 L19.287,2.268 C18.886,2.143 18.628,1.710 18.713,1.303 C18.799,0.893 19.195,0.662 19.594,0.784 L26.218,2.314 C26.219,2.314 26.220,2.316 26.222,2.316 C26.411,2.371 26.585,2.500 26.700,2.690 C26.815,2.882 26.845,3.098 26.803,3.291 Z"></path>
+                            <path fill-rule="evenodd"
+                              d="M26.803,3.291 C26.802,3.293 26.803,3.296 26.803,3.298 L24.997,9.807 C24.954,10.011 24.836,10.170 24.678,10.264 C24.519,10.359 24.316,10.387 24.115,10.324 C23.714,10.200 23.457,9.766 23.542,9.360 L24.825,4.733 L1.373,18.726 C1.029,18.931 0.569,18.792 0.342,18.415 C0.116,18.038 0.211,17.568 0.555,17.363 L24.022,3.362 L19.287,2.268 C18.886,2.143 18.628,1.710 18.713,1.303 C18.799,0.893 19.195,0.662 19.594,0.784 L26.218,2.314 C26.219,2.314 26.220,2.316 26.222,2.316 C26.411,2.371 26.585,2.500 26.700,2.690 C26.815,2.882 26.845,3.098 26.803,3.291 Z">
+                            </path>
                           </svg>
                         </svg>
                         <svg class="icon_svg mwl_arrow hover" aria-hidden="true">
                           <svg viewBox="0 0 27 19" id="icon_mwl_arrow">
-                            <path fill-rule="evenodd" d="M26.803,3.291 C26.802,3.293 26.803,3.296 26.803,3.298 L24.997,9.807 C24.954,10.011 24.836,10.170 24.678,10.264 C24.519,10.359 24.316,10.387 24.115,10.324 C23.714,10.200 23.457,9.766 23.542,9.360 L24.825,4.733 L1.373,18.726 C1.029,18.931 0.569,18.792 0.342,18.415 C0.116,18.038 0.211,17.568 0.555,17.363 L24.022,3.362 L19.287,2.268 C18.886,2.143 18.628,1.710 18.713,1.303 C18.799,0.893 19.195,0.662 19.594,0.784 L26.218,2.314 C26.219,2.314 26.220,2.316 26.222,2.316 C26.411,2.371 26.585,2.500 26.700,2.690 C26.815,2.882 26.845,3.098 26.803,3.291 Z"></path>
+                            <path fill-rule="evenodd"
+                              d="M26.803,3.291 C26.802,3.293 26.803,3.296 26.803,3.298 L24.997,9.807 C24.954,10.011 24.836,10.170 24.678,10.264 C24.519,10.359 24.316,10.387 24.115,10.324 C23.714,10.200 23.457,9.766 23.542,9.360 L24.825,4.733 L1.373,18.726 C1.029,18.931 0.569,18.792 0.342,18.415 C0.116,18.038 0.211,17.568 0.555,17.363 L24.022,3.362 L19.287,2.268 C18.886,2.143 18.628,1.710 18.713,1.303 C18.799,0.893 19.195,0.662 19.594,0.784 L26.218,2.314 C26.219,2.314 26.220,2.316 26.222,2.316 C26.411,2.371 26.585,2.500 26.700,2.690 C26.815,2.882 26.845,3.098 26.803,3.291 Z">
+                            </path>
                           </svg>
                         </svg>
                       </div>
@@ -71,12 +75,16 @@
                     <div>
                       <svg class="icon_svg mwl_arrow default" aria-hidden="true">
                         <svg viewBox="0 0 27 19" id="icon_mwl_arrow">
-                          <path fill-rule="evenodd" d="M26.803,3.291 C26.802,3.293 26.803,3.296 26.803,3.298 L24.997,9.807 C24.954,10.011 24.836,10.170 24.678,10.264 C24.519,10.359 24.316,10.387 24.115,10.324 C23.714,10.200 23.457,9.766 23.542,9.360 L24.825,4.733 L1.373,18.726 C1.029,18.931 0.569,18.792 0.342,18.415 C0.116,18.038 0.211,17.568 0.555,17.363 L24.022,3.362 L19.287,2.268 C18.886,2.143 18.628,1.710 18.713,1.303 C18.799,0.893 19.195,0.662 19.594,0.784 L26.218,2.314 C26.219,2.314 26.220,2.316 26.222,2.316 C26.411,2.371 26.585,2.500 26.700,2.690 C26.815,2.882 26.845,3.098 26.803,3.291 Z"></path>
+                          <path fill-rule="evenodd"
+                            d="M26.803,3.291 C26.802,3.293 26.803,3.296 26.803,3.298 L24.997,9.807 C24.954,10.011 24.836,10.170 24.678,10.264 C24.519,10.359 24.316,10.387 24.115,10.324 C23.714,10.200 23.457,9.766 23.542,9.360 L24.825,4.733 L1.373,18.726 C1.029,18.931 0.569,18.792 0.342,18.415 C0.116,18.038 0.211,17.568 0.555,17.363 L24.022,3.362 L19.287,2.268 C18.886,2.143 18.628,1.710 18.713,1.303 C18.799,0.893 19.195,0.662 19.594,0.784 L26.218,2.314 C26.219,2.314 26.220,2.316 26.222,2.316 C26.411,2.371 26.585,2.500 26.700,2.690 C26.815,2.882 26.845,3.098 26.803,3.291 Z">
+                          </path>
                         </svg>
                       </svg>
                       <svg class="icon_svg mwl_arrow hover" aria-hidden="true">
                         <svg viewBox="0 0 27 19" id="icon_mwl_arrow">
-                          <path fill-rule="evenodd" d="M26.803,3.291 C26.802,3.293 26.803,3.296 26.803,3.298 L24.997,9.807 C24.954,10.011 24.836,10.170 24.678,10.264 C24.519,10.359 24.316,10.387 24.115,10.324 C23.714,10.200 23.457,9.766 23.542,9.360 L24.825,4.733 L1.373,18.726 C1.029,18.931 0.569,18.792 0.342,18.415 C0.116,18.038 0.211,17.568 0.555,17.363 L24.022,3.362 L19.287,2.268 C18.886,2.143 18.628,1.710 18.713,1.303 C18.799,0.893 19.195,0.662 19.594,0.784 L26.218,2.314 C26.219,2.314 26.220,2.316 26.222,2.316 C26.411,2.371 26.585,2.500 26.700,2.690 C26.815,2.882 26.845,3.098 26.803,3.291 Z"></path>
+                          <path fill-rule="evenodd"
+                            d="M26.803,3.291 C26.802,3.293 26.803,3.296 26.803,3.298 L24.997,9.807 C24.954,10.011 24.836,10.170 24.678,10.264 C24.519,10.359 24.316,10.387 24.115,10.324 C23.714,10.200 23.457,9.766 23.542,9.360 L24.825,4.733 L1.373,18.726 C1.029,18.931 0.569,18.792 0.342,18.415 C0.116,18.038 0.211,17.568 0.555,17.363 L24.022,3.362 L19.287,2.268 C18.886,2.143 18.628,1.710 18.713,1.303 C18.799,0.893 19.195,0.662 19.594,0.784 L26.218,2.314 C26.219,2.314 26.220,2.316 26.222,2.316 C26.411,2.371 26.585,2.500 26.700,2.690 C26.815,2.882 26.845,3.098 26.803,3.291 Z">
+                          </path>
                         </svg>
                       </svg>
                     </div>
@@ -96,64 +104,130 @@
 </template>
 
 <script>
+import { getNewsList } from '@/api/news.js'
+import { API_CONFIG } from '@/config/api.js'
 export default {
   name: 'NewsSection',
   data() {
     return {
-      newsList: [
-        {
-          title: '山西投召开传达贯彻省属企业改革发展工作座谈会精神专题会暨推动集团改革发展转型研讨会',
-          date: '2025-09-08',
-          image: '/src/assets/images/news1.jpg',
-          summary: '9月6日，山西投召开传达贯彻省属企业改革发展工作座谈会精神专题会暨推动集团改革发展转型研讨会。集团党委副书记、副董事长、总经理杜锐主持会议并讲话，党委委员结合分管领域作交流发言。会议要求，各单位、各部门要完善中国特色现代企业制度，坚持"两个一以贯之"，加强党对国有企业的领导，完善权责明晰的公司治理机制，强化风险管控。要切实增强使命感、责任感、紧迫感和危机感，牢记"国有"定位、"企业"属性，对标...',
-          link: '#'
-        },
-        {
-          title: '山西投与万家寨水务控股集团举行工作会谈',
-          date: '2025-09-01',
-          image: '/src/assets/images/news2.jpg',
-          summary: '8月29日，山西投党委书记、董事长倪华光带队拜访万家寨水务控股集团党委书记、董事长兰康杰，就深化水利领域合作、推进重点项目落地进行深入交流。万家寨水务控股集团党委副书记、副董事长、总经理郭文，山西投党委副书记、副董事长、总经理杜锐参加会谈。倪华光对万家寨水控集团一直以来给予的支持表示感谢。他指出，近年来，山西投实施投资设双轮驱动，形成了集科研、咨询、勘察、设计、投资、设、运营为一体的全...',
-          link: '#'
-        },
-        {
-          title: '山西投举办品牌设工作培训班',
-          date: '2025-08-28',
-          image: '/src/assets/images/news3.jpg',
-          summary: '8月26日，山西投举办品牌设工作培训班。各二级单位分管品牌设工作的领导、部门负责人及骨干人员共300余人参加。培训特邀中国品牌设促进会品牌专家赵宝柱授课，重点围绕"品格向善、品质至真、品行尽美"理念，从国家战略、国企要求和企业实际三个维度系统解读品牌发展新形势，深入剖析品牌战略管理、过程控制、品业融合、形象识别与精准传播五大价值提升路径。培训采用"系统知识+案例解析+工作指引"模式，通过理论讲...',
-          link: '#'
+      newsList: [],
+      companyNews: [],
+      stateNews: [],
+      loading: {
+        newsList: false,
+        companyNews: false,
+        stateNews: false
+      },
+      error: {
+        newsList: null,
+        companyNews: null,
+        stateNews: null
+      }
+    }
+  },
+  mounted() {
+    this.fetchNewsData()
+  },
+  methods: {
+    async fetchNewsData() {
+      try {
+        // 新闻中心 - 综合新闻
+        this.loading.newsList = true
+        const newsResponse = await getNewsList({
+          page: 1,
+          pageSize: 3,
+          category: '综合新闻'
+        })
+        if (newsResponse.data && newsResponse.data.info) {
+
+          for (const item of newsResponse.data.info) {
+            const publishDate = new Date(item.publishtime)
+            //const day = publishDate.getDate().toString().padStart(2, '0')
+            // const month = `${publishDate.getMonth() + 1}月`
+
+            this.newsList.push({
+              title: item.title,
+              summary: item.summary,
+              image: item.cover ? API_CONFIG.BASE_URL + `${item.cover}` : '/src/assets/images/news1.jpg',
+              link: item.link || '#',
+              date: publishDate.toLocaleDateString()
+            })
+          }
+        } else {
+          this.newsList = []
         }
-      ],
-      companyNews: [
-        {
-          title: '山西投七集团太原市晋源区武家庄城中村改造项目：科技赋能降本增效 管理聚力提质履约',
-          date: '2025-09-09',
-          link: '#'
-        },
-        {
-          title: '山西投三集团在第十届工程设行业互联网大会上斩获两项数字化成果',
-          date: '2025-09-08',
-          link: '#'
-        },
-        {
-          title: '山西投八集团临汾市蒲县蒲伊西街棚户区改造项目：匠心筑安居 精工焕城新',
-          date: '2025-09-08',
-          link: '#'
+        this.loading.newsList = false
+      } catch (error) {
+        console.error('获取新闻列表失败:', error)
+        this.error.newsList = error.message
+        this.loading.newsList = false
+      }
+
+      try {
+        // 公司要闻
+        this.loading.companyNews = true
+        const companyResponse = await getNewsList({
+          page: 1,
+          pageSize: 3,
+          category: '公司要闻'
+        })
+        if (companyResponse.data && companyResponse.data.info) {
+
+          for (const item of companyResponse.data.info) {
+            const publishDate = new Date(item.publishtime)
+            //const day = publishDate.getDate().toString().padStart(2, '0')
+            // const month = `${publishDate.getMonth() + 1}月`
+
+            this.companyNews.push({
+              title: item.title,
+              summary: item.summary,
+              image: item.cover ? API_CONFIG.BASE_URL + `${item.cover}` : '/src/assets/images/news1.jpg',
+              link: item.link || '#',
+              date: publishDate.toLocaleDateString()
+            })
+          }
+        } else {
+          this.companyNews = []
         }
-      ],
-      stateNews: [
-        {
-          title: '省属企业分别召开会议传达学习贯彻省委十二届十次全会精神',
-          date: '2025-09-01',
-          image: '/src/assets/images/state-news1.jpg',
-          link: '#'
-        },
-        {
-          title: '习近平同志《论坚持全面深化改革》第一卷、第二卷出版发行',
-          date: '2025-08-18',
-          image: '/src/assets/images/state-news2.jpg',
-          link: '#'
+        this.loading.companyNews = false
+      } catch (error) {
+        console.error('获取公司要闻失败:', error)
+        this.error.companyNews = error.message
+        this.loading.companyNews = false
+      }
+
+      try {
+        // 时政新闻
+        this.loading.stateNews = true
+        const stateResponse = await getNewsList({
+          page: 1,
+          pageSize: 3,
+          category: '时政新闻'
+        })
+        if (stateResponse.data && stateResponse.data.info) {
+
+          for (const item of stateResponse.data.info) {
+            const publishDate = new Date(item.publishtime)
+            //const day = publishDate.getDate().toString().padStart(2, '0')
+            // const month = `${publishDate.getMonth() + 1}月`
+
+            this.stateNews.push({
+              title: item.title,
+              summary: item.summary,
+              image: item.cover ? API_CONFIG.BASE_URL + `${item.cover}` : '/src/assets/images/news1.jpg',
+              link: item.link || '#',
+              date: publishDate.toLocaleDateString()
+            })
+          }
+        } else {
+          this.stateNews = []
         }
-      ]
+        this.loading.stateNews = false
+      } catch (error) {
+        console.error('获取时政新闻失败:', error)
+        this.error.stateNews = error.message
+        this.loading.stateNews = false
+      }
     }
   }
 }
@@ -164,8 +238,16 @@ export default {
 @import '/src/assets/css/style.css';
 
 /* Prevent image distortion and ensure responsive cover */
-.img .img_hezi{ background-size: cover; background-position: center center; background-repeat: no-repeat; width: 100%; display: block; }
+.img .img_hezi {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 100%;
+  display: block;
+}
 
 /* Make first screen section fill viewport height */
-.section.home1{ min-height: 100vh; }
+.section.home1 {
+  min-height: 100vh;
+}
 </style>
