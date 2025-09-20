@@ -40,7 +40,7 @@ import CompanyIntro from '../components/common/CompanyIntro.vue'
 import BusinessSection from '../components/sections/BusinessSection.vue'
 import HistorySection from '../components/sections/HistorySection.vue'
 import ProjectShowcase from '../components/common/ProjectShowcase.vue'
-import TopicSection from '../components/sections/TopicSection.vue'
+// import TopicSection from '../components/sections/TopicSection.vue'
 import FooterSection from '../components/layout/FooterSection.vue'
 import fullpage from 'fullpage.js'
 
@@ -54,7 +54,7 @@ export default {
     BusinessSection,
     HistorySection,
     ProjectShowcase,
-    TopicSection,
+    // TopicSection,
     FooterSection
   },
   data() {
@@ -145,7 +145,7 @@ export default {
       try {
         this.fullpageInstance = new fullpage('#fullpage', {
           licenseKey: 'gplv3-license', // 使用GPL v3许可证（开源版本）
-          anchors: ["f0", "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8"],
+          anchors: ["f0", "f1", "f2", "f3", "f4", "f5", "f6", "f7"],
           recordHistory: false, // 禁用历史记录
           updateHash: false,    // 禁用hash更新
           scrollingSpeed: 1000,

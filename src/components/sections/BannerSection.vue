@@ -151,7 +151,7 @@ export default {
       try {
         const response = await getCarouselList()
         console.log(response)
-        console.log(response.data, "XXXXX")
+        // console.log(response.data, "XXXXX")
         // 根据实际API返回结构调整
         if (response && response.data) {
           return response.data.map(item => ({
