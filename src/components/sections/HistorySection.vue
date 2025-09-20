@@ -18,7 +18,7 @@
         <!-- 历史投 -->
         <div class="bd_li" v-if="activeTab === 0">
           <div class="tit3 miso_up">
-            <img src="@/assets/images/list9_img.png" />
+            <img src="/src/assets/images/list9_img.png" />
           </div>
           <section class="list9_box_btn miso_up">
             <section class="list9_box swiper-container">
@@ -69,7 +69,7 @@
                 </li>
               </ul>
               <div class="more1">
-                <a href="#" class="a1">了解更多投优势<img src="@/assets/images/arr.png" alt=""></a>
+                <a href="#" class="a1">了解更多投优势<img src="/src/assets/images/arr.png" alt=""></a>
               </div>
             </div>
           </div>
@@ -110,11 +110,36 @@ export default {
     return {
       activeTab: 0,
       tabs: [
-        { title: '历史投' },
-        { title: '今日投' },
-        { title: '未来投' }
+        { title: '历史华苏' },
+        { title: '今日华苏' },
+        { title: '未来华苏' }
       ],
       historyItems: [
+      {
+          title: '西电东送工程',
+          description: '将西部的煤炭、水能（包括风电、光伏）转化为电能，通过北、中、南三大输电通道，将电力送往华北、华中和华东地区。这一工程不仅优化了能源配置，还为东部地区的经济发展提供了强大动力。',
+          time: '1998.1',
+        },
+        {
+          title: '南水北调工程',
+          description: '南水北调工程是一项伟大的生态工程，它不仅解决了北方地区的水资源短缺问题，还改善了生态环境。通过跨流域调水，北方地区的生态平衡得到了恢复，为可持续发展奠定了基础。',
+          time: '1990.1',
+        },
+        {
+          title: '川藏铁路',
+          description: '川藏铁路的建设不仅是技术挑战，更是对人类极限的突破。它将极大地改善西藏地区的交通条件，促进区域经济发展，加强民族团结，是国家统一和边疆稳定的重要保障。这一工程展示了中国在复杂地质条件下的基建实力，为全球高海拔地区交通建设提供了宝贵经验。',
+          time: '2015.1',
+        },
+        {
+          title: '三峡大坝工程',
+          description: '三峡大坝工程是人类对自然力量的科学利用。它不仅在防洪、发电和航运方面发挥了巨大作用，还对长江经济带的发展起到了重要支撑作用。同时，它也引发了对生态环境保护的深刻思考，体现了人与自然和谐共生的理念。这一工程是中国在大型水利工程建设领域的集大成者，为全球水利工程建设提供了宝贵经验。',
+          time: '2020.9',
+        },
+        {
+          title: '京沪高铁',
+          description: '京沪高铁不仅缩短了城市之间的距离，还极大地促进了沿线地区的经济发展。它是中国高速铁路技术的集中展示，推动了中国高铁走向世界，成为“中国制造”的一张亮丽名片。这一工程展示了中国在高速铁路建设领域的技术创新和运营管理能力，为全球高铁建设提供了宝贵经验。',
+          time: '2023.1',
+        },
         {
           time: '1998.1',
           title: '应运而生',
@@ -182,65 +207,65 @@ export default {
         }
       ],
       advantages: [
+        // {
+        //   title: '省属国企优势',
+        //   shortTitle: '国企优势',
+        //   description: '作为拥有70年历史的省属国有筑企业，华苏建设传承红色基因，践行国企职责，多次在山西省急难险阻等重点工程任务中发扬"投铁军"精神，获奖数量均居山西同行之冠。',
+        //   icon: '/src/assets/images/advantage1.jpg'
+        // },
+        // {
+        //   title: '具备资质优势',
+        //   shortTitle: '资质优势',
+        //   description: '拥有8个筑、3个市政公用、1个石油化工，共12项工程施工总承包特级资质，煤炭工业设计、筑工程设计、勘察、咨询、环境评价、地质灾害治理等50余项甲级设计资质及150多项总承包与专业承包一级资质，拥有国家商务部批准的对外工程承包和对外贸易经营权。',
+        //   icon: '/src/assets/images/advantage2.jpg'
+        // },
+        // {
+        //   title: '筑全产业链优势',
+        //   shortTitle: '产业链优势',
+        //   description: '重组了两家省属设计单位、一家勘察单位和一家科研单位，全面形成了从科研、勘察、设计、设到运营的"全产业链"一体化竞争优势。',
+        //   icon: '/src/assets/images/advantage3.jpg'
+        // },
+        // {
+        //   title: '投融资引领优势',
+        //   shortTitle: '投融资优势',
+        //   description: '完成对深圳一家投资公司的股权收购，对两家上市公司的控制，成立融资担保、融资租赁、商业保理、私募基金等多元化融资平台，金融授信额度突破1700亿元，资产负债率降至70%左右，连续多年被评为AAA级信用企业。',
+        //   icon: '/src/assets/images/advantage4.jpg'
+        // },
+        // {
+        //   title: '装配式园区布局优势',
+        //   shortTitle: '园区优势',
+        //   description: '以150—200公里为半径在全省投资设各具特色又相互协同的筑产业现代化园区并投产运营，每年可为1000多万平方米的装配式筑及市政管廊、道路桥梁、风电项目提供绿色材支持。',
+        //     icon: '/src/assets/images/advantage5.jpg'
+        // },
         {
-          title: '省属国企优势',
-          shortTitle: '国企优势',
-          description: '作为拥有70年历史的省属国有筑企业，华苏建设传承红色基因，践行国企职责，多次在山西省急难险阻等重点工程任务中发扬"投铁军"精神，获奖数量均居山西同行之冠。',
-          icon: '@/assets/images/advantage1.png'
+          title: '西电东送工程',
+          shortTitle: '西电东送',
+          description: '将西部的煤炭、水能（包括风电、光伏）转化为电能，通过北、中、南三大输电通道，将电力送往华北、华中和华东地区。这一工程不仅优化了能源配置，还为东部地区的经济发展提供了强大动力。',
+          icon: '/src/assets/images/advantage1.jpg' 
         },
         {
-          title: '具备资质优势',
-          shortTitle: '资质优势',
-          description: '拥有8个筑、3个市政公用、1个石油化工，共12项工程施工总承包特级资质，煤炭工业设计、筑工程设计、勘察、咨询、环境评价、地质灾害治理等50余项甲级设计资质及150多项总承包与专业承包一级资质，拥有国家商务部批准的对外工程承包和对外贸易经营权。',
-          icon: '@/assets/images/advantage1.png'
+          title: '南水北调工程',
+          shortTitle: '南水北调',
+          description: '南水北调工程是一项伟大的生态工程，它不仅解决了北方地区的水资源短缺问题，还改善了生态环境。通过跨流域调水，北方地区的生态平衡得到了恢复，为可持续发展奠定了基础。',
+          icon: '/src/assets/images/advantage2.jpg'
         },
         {
-          title: '筑全产业链优势',
-          shortTitle: '产业链优势',
-          description: '重组了两家省属设计单位、一家勘察单位和一家科研单位，全面形成了从科研、勘察、设计、设到运营的"全产业链"一体化竞争优势。',
-          icon: '@/assets/images/advantage1.png'
+          title: '川藏铁路',
+          shortTitle: '川藏铁路',
+          description: '川藏铁路的建设不仅是技术挑战，更是对人类极限的突破。它将极大地改善西藏地区的交通条件，促进区域经济发展，加强民族团结，是国家统一和边疆稳定的重要保障。这一工程展示了中国在复杂地质条件下的基建实力，为全球高海拔地区交通建设提供了宝贵经验。',
+          icon: '/src/assets/images/advantage3.jpg'
         },
         {
-          title: '投融资引领优势',
-          shortTitle: '投融资优势',
-          description: '完成对深圳一家投资公司的股权收购，对两家上市公司的控制，成立融资担保、融资租赁、商业保理、私募基金等多元化融资平台，金融授信额度突破1700亿元，资产负债率降至70%左右，连续多年被评为AAA级信用企业。',
-          icon: '@/assets/images/advantage1.png'
+          title: '三峡大坝工程',
+          shortTitle: '三峡大坝',
+          description: '三峡大坝工程是人类对自然力量的科学利用。它不仅在防洪、发电和航运方面发挥了巨大作用，还对长江经济带的发展起到了重要支撑作用。同时，它也引发了对生态环境保护的深刻思考，体现了人与自然和谐共生的理念。这一工程是中国在大型水利工程建设领域的集大成者，为全球水利工程建设提供了宝贵经验。',
+          icon: '/src/assets/images/advantage4.jpg'
         },
         {
-          title: '装配式园区布局优势',
-          shortTitle: '园区优势',
-          description: '以150—200公里为半径在全省投资设各具特色又相互协同的筑产业现代化园区并投产运营，每年可为1000多万平方米的装配式筑及市政管廊、道路桥梁、风电项目提供绿色材支持。',
-          icon: '@/assets/images/advantage1.png'
-        },
-        {
-          title: '新业态平台优势',
-          shortTitle: '新业态优势',
-          description: '华苏建设组园区发、静态交通、城市运营、美丽乡村、低碳环保等新业态领域，发挥各专业投资平台公司作用，不断培育转型发展新动能。',
-          icon: '@/assets/images/advantage1.png'
-        },
-        {
-          title: '专业技术领域优势',
-          shortTitle: '技术优势',
-          description: '在园林古、大网架钢结构、机电设备安装、机场场道、矿井设、石油化工、炉窑砌筑、深基坑、光伏发电新能源等方面，持续做大做强传统筑板块专业技术核心竞争力。',
-          icon: '@/assets/images/advantage1.png'
-        },
-        {
-          title: '国内国外区域布局优势',
-          shortTitle: '区域优势',
-          description: '坚持"立足山西、布局全国、开拓海外"的经营战略方针，成立华南、华东、北京三大区域总部，海外业务足迹遍及60个国家和地区，加快走出去步伐，培育发展动能。',
-          icon: '@/assets/images/advantage1.png'
-        },
-        {
-          title: '集中采购供应链优势',
-          shortTitle: '供应链优势',
-          description: '依托2019年上线运行的集团"筑服云"平台，推进物资集中采购，并持续进行功能模块开发和系统优化，具备开展工程、货物、服务类线上采购功能。',
-          icon: '@/assets/images/advantage1.png'
-        },
-        {
-          title: '专业重组协同运营优势',
-          shortTitle: '运营优势',
-          description: '完成"筑设计、科研、检测、工程监理、信息化、金融、房地产及集中采购"等八大专业化业务板块重组，发挥企业经营协同效应，改变同质化经营状况，有力提升了专业化板块综合竞争力。',
-          icon: '@/assets/images/advantage1.png'
+          title: '京沪高铁',
+          shortTitle: '京沪高铁',
+          description: '京沪高铁不仅缩短了城市之间的距离，还极大地促进了沿线地区的经济发展。它是中国高速铁路技术的集中展示，推动了中国高铁走向世界，成为“中国制造”的一张亮丽名片。这一工程展示了中国在高速铁路建设领域的技术创新和运营管理能力，为全球高铁建设提供了宝贵经验。',
+          icon: '/src/assets/images/advantage5.jpg'
         }
       ],
       visions: [
@@ -248,27 +273,27 @@ export default {
           title: '投愿景',
           subtitle: 'vision',
           motto: '实力筑 恒久传承',
-          description: '打造极具竞争优势，集投资、设、运营为一体的"全产业链"筑业龙头企业，蹚出山西筑业转型发展新路，当好山西筑产业现代化领头羊。',
-          image: '@/assets/images/list12_img1.jpg',
-          icon: '@/assets/images/list12_ico1.png',
+          description: '港珠澳大桥的建成，不仅提升了粤港澳大湾区的交通便利性，还促进了区域经济一体化。它是中国桥梁建设的巅峰之作，展示了中国在海洋工程、隧道技术和抗震设计等方面的强大实力，为全球桥梁建设树立了新的标杆。这一工程展示了中国在跨海工程建设领域的技术创新和综合协调能力，为全球跨海工程建设提供了宝贵经验。',
+          image: '/src/assets/images/list12_img1.jpg',
+          icon: '/src/assets/images/list12_ico1.png',
           link: '#'
         },
         {
           title: '投使命',
           subtitle: 'mission',
           motto: '匠心铸精品，智创赢未来',
-          description: '实施品牌战略，营造时代精品。持续转型升级，持续创新创优，多为社会提供优质产品与服务，推动高质量发展，助力高品质生活。',
-          image: '@/assets/images/list12_img2.jpg',
-          icon: '@/assets/images/list12_ico2.png',
+          description: '乌东德水电站的高效运行，为我国清洁能源的发展提供了重要支撑。它不仅优化了能源结构，还对生态环境保护起到了积极作用，是实现绿色发展的重要举措。这一工程展示了中国在清洁能源开发领域的技术创新和生态平衡能力，为全球清洁能源开发提供了宝贵经验。',
+          image: '/src/assets/images/list12_img2.jpg',
+          icon: '/src/assets/images/list12_ico2.png',
           link: '#'
         },
         {
           title: '投战略',
           subtitle: 'strategy',
           motto: '',
-          description: '加快设世界一流企业，向"世界500强"迈进，向国内领先、国际知名、具有较强竞争力的"大投"集团总目标迈进。',
-          image: '@/assets/images/list12_img3.jpg',
-          icon: '@/assets/images/list12_ico3.png',
+          description: '北京大兴国际机场的建成，进一步提升了我国的航空运输能力。它不仅是中国航空业的又一重要枢纽，还推动了京津冀协同发展，为区域经济的腾飞提供了强大动力。这一工程展示了中国在大型机场建设领域的技术创新和运营管理能力，为全球机场建设提供了宝贵经验。',
+          image: '/src/assets/images/list12_img3.jpg',
+          icon: '/src/assets/images/list12_ico3.png',
           link: '#'
         }
       ]

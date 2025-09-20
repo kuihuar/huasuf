@@ -115,6 +115,9 @@ export default {
       // 可以根据项目ID生成详情页链接
       return `#/project/${project.ID}`
     },
+    getDate(project) {
+      return project.scheduleddate.split(' ')[0]
+    },
     
     // 默认项目数据作为后备
     getDefaultProjects() {
