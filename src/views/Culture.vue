@@ -34,7 +34,7 @@
     <section id="m_n_nav">
       <div id="n_n_title">
         <a id="bnt_back" href="javascript:history.go(-1)" class="iconfont">
-          <img src="/src/assets/images/m_n_nav_left.svg" />
+          <!-- <img src="/src/assets/images/m_n_nav_left.svg" /> -->
         </a>
         <h1>{{ getCurrentTitle() }}</h1>
         <!-- <div id="bnt_sub_nav" class="iconfont" @click="toggleMobileNav">
