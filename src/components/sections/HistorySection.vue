@@ -61,7 +61,7 @@
               <ul class="list10 flex">
                 <li v-for="(advantage, index) in advantages" :key="index">
                   <a>
-                    <div class="ico">
+                    <div class="ico">))))
                       <img :src="advantage.icon" />
                     </div>
                     <h6>{{ advantage.shortTitle }}</h6>
