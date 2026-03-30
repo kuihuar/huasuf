@@ -2188,10 +2188,19 @@ section.active.home1 .box1 .tit1::after, section.active.home1 .box3 .tit1::after
 /* 移动端直接不渲染，不加载图片 */
 @media (max-width: 768px) {
 	.n_banner {
-	  display: none !important;
-	  content: none; /* 彻底不渲染 */
+		display: none !important;
+		content: none; /* 彻底不渲染 */
 	}
-  }
+}
+.m_header_box {
+	position: fixed;    /* 核心：固定定位 */
+	top: 0;             /* 永远贴在屏幕最顶部 */
+	left: 0;
+	width: 100%;        /* 宽度铺满屏幕 */
+	z-index: 9999;      /* 保证在最上层，不被内容盖住 */
+	background: #fff;   /* 必须加背景色，否则会透底下内容 */
+	box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* 可选：加阴影更好看 */
+}  
 /* AOS fallback - 确保元素在AOS加载失败时仍然可见 */
 [data-aos] {
   opacity: 1 !important;
