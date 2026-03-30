@@ -34,74 +34,13 @@
             </li>
           </ul>
   
-          <!-- 发展历程分页组件 -->
-          <div class="pagebar" v-if="!loading && !error && totalPages > 1">
-            <span class="p_pages">
-              <!-- 首页 -->
-              <span 
-                :class="['p_first', currentPage === 1 ? 'p_fun_d' : 'p_fun']"
-                @click="goToPage(1)"
-              >
-                首页
-              </span>
-              
-              <!-- 上一页 -->
-              <span 
-                :class="['p_prev', currentPage === 1 ? 'p_fun_d' : 'p_fun']"
-                @click="prevPage"
-              >
-                上页
-              </span>
-              
-              <!-- 页码 -->
-              <template v-for="page in visiblePages" :key="page">
-                <span 
-                  v-if="page === currentPage"
-                  class="p_no_d"
-                >
-                  {{ page }}
-                </span>
-                <span 
-                  v-else
-                  class="p_no"
-                  @click="goToPage(page)"
-                >
-                  {{ page }}
-                </span>
-              </template>
-              
-              <!-- 省略号 -->
-              <span v-if="currentPage + 2 < totalPages" class="p_dot">...</span>
-              
-              <!-- 最后一页 -->
-              <span 
-                v-if="totalPages > 1 && !visiblePages.includes(totalPages)"
-                class="p_no"
-                @click="goToPage(totalPages)"
-              >
-                {{ totalPages }}
-              </span>
-              
-              <!-- 下一页 -->
-              <span 
-                :class="['p_next', currentPage === totalPages ? 'p_fun_d' : 'p_fun']"
-                @click="nextPage"
-              >
-                下页
-              </span>
-              
-              <!-- 尾页 -->
-              <span 
-                :class="['p_last', currentPage === totalPages ? 'p_fun_d' : 'p_fun']"
-                @click="goToPage(totalPages)"
-              >
-                尾页
-              </span>
-            </span>
-            
-            <!-- 总数显示 -->
-            <span class="p_t">共{{ totalCount }}条</span>
-          </div>
+          <PageBar
+            v-if="!loading && !error && totalPages > 1"
+            :current-page="currentPage"
+            :total-pages="totalPages"
+            :total-count="totalCount"
+            @change="goToPage"
+          />
         </div>
       </div>
     </section>
@@ -110,9 +49,11 @@
   <script>
   import { getNewsList } from '@/api/news.js'
   import { API_CONFIG } from '@/config/api.js'
-  
+  import PageBar from '@/components/common/PageBar.vue'
+
   export default {
     name: 'DevelopmentHistory',
+    components: { PageBar },
     data() {
       return {
         loading: false,
@@ -122,18 +63,6 @@
         totalPages: 5,
         totalCount: 0, // 总数据量
         newsList: [] // 初始为空数组
-      }
-    },
-    computed: {
-      visiblePages() {
-        const pages = []
-        const start = Math.max(1, this.currentPage - 2)
-        const end = Math.min(this.totalPages, this.currentPage + 2)
-  
-        for (let i = start; i <= end; i++) {
-          pages.push(i)
-        }
-        return pages
       }
     },
     // 添加生命周期钩子
@@ -322,64 +251,4 @@
     background: #1e3a8a;
   }
   
-  /* 分页样式 */
-  .pagebar {
-    margin-top: 2rem;
-    text-align: center;
-  }
-  
-  .p_pages {
-    display: inline-block;
-  }
-  
-  .p_first, .p_prev, .p_next, .p_last, .p_no {
-    cursor: pointer;
-    padding: 0.2rem 0.4rem;
-    margin: 0 0.1rem;
-    border: 1px solid #ddd;
-    background: #fff;
-    color: #333;
-    text-decoration: none;
-    display: inline-block;
-    transition: all 0.3s;
-  }
-  
-  .p_first:hover, .p_prev:hover, .p_next:hover, .p_last:hover, .p_no:hover {
-    background: #284ca7;
-    color: #fff;
-    border-color: #284ca7;
-  }
-  
-  .p_fun_d {
-    cursor: not-allowed;
-    background: #f5f5f5;
-    color: #999;
-    border-color: #e0e0e0;
-  }
-  
-  .p_fun_d:hover {
-    background: #f5f5f5;
-    color: #999;
-    border-color: #e0e0e0;
-  }
-  
-  .p_no_d {
-    padding: 0.2rem 0.4rem;
-    margin: 0 0.1rem;
-    background: #284ca7;
-    color: #fff;
-    border: 1px solid #284ca7;
-    display: inline-block;
-  }
-  
-  .p_dot {
-    padding: 0.2rem 0.4rem;
-    margin: 0 0.1rem;
-    color: #999;
-  }
-  
-  .p_t {
-    margin-left: 1rem;
-    color: #666;
-  }
   </style>

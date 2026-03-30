@@ -36,22 +36,13 @@
             </div>
           </div>
   
-          <!-- 分页 -->
-        <div class="pagination" v-if="!loading && !error && totalPages > 1" >
-            <a href="#" class="prev" :class="{ disabled: currentPage === 1 }" @click.prevent="prevPage">
-              <i class="icon-left"></i> 上一页
-            </a>
-            <div class="page-numbers">
-              <a href="#" v-for="page in visiblePages" :key="page" 
-                 :class="{ active: page === currentPage }" 
-                 @click.prevent="goToPage(page)">
-                {{ page }}
-              </a>
-            </div>
-            <a href="#" class="next" :class="{ disabled: currentPage === totalPages }" @click.prevent="nextPage">
-              下一页 <i class="icon-right"></i>
-            </a>
-          </div>
+        <PageBar
+          v-if="!loading && !error && totalPages > 1"
+          :current-page="currentPage"
+          :total-pages="totalPages"
+          :total-count="totalCount"
+          @change="goToPage"
+        />
         </div>
       </div>
     </div>
@@ -60,9 +51,11 @@
   <script>
 import { getNewsList } from '@/api/news.js'
 import { API_CONFIG } from '@/config/api.js'
+import PageBar from '@/components/common/PageBar.vue'
 
   export default {
     name: 'KeyNews',
+    components: { PageBar },
     data() {
       return {
       loading: false,
@@ -72,18 +65,6 @@ import { API_CONFIG } from '@/config/api.js'
         totalPages: 5,
       totalCount: 0, // 总数据量
       newsList: [] // 初始为空数组
-    }
-  },
-  computed: {
-    visiblePages() {
-      const pages = []
-      const start = Math.max(1, this.currentPage - 2)
-      const end = Math.min(this.totalPages, this.currentPage + 2)
-      
-      for (let i = start; i <= end; i++) {
-        pages.push(i)
-      }
-      return pages
     }
   },
   // 添加生命周期钩子
@@ -420,56 +401,6 @@ import { API_CONFIG } from '@/config/api.js'
     color: #999;
   }
   
-  /* 分页样式 */
-  .pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-top: 40px;
-  }
-  
-  .pagination a {
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    background: #fff;
-    color: #333;
-    text-decoration: none;
-    border-radius: 6px;
-    border: 1px solid #ddd;
-    transition: all 0.3s ease;
-    font-size: 14px;
-  }
-  
-  .pagination a:hover:not(.disabled) {
-    background: #007bff;
-    color: #fff;
-    border-color: #007bff;
-  }
-  
-  .pagination a.disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  
-  .page-numbers {
-    display: flex;
-    gap: 5px;
-  }
-  
-  .page-numbers a {
-    min-width: 40px;
-    text-align: center;
-    padding: 10px 15px;
-  }
-  
-  .page-numbers a.active {
-    background: #007bff;
-    color: #fff;
-    border-color: #007bff;
-  }
-
 /* 新增样式 */
 .loading, .error {
   text-align: center;
@@ -517,21 +448,6 @@ import { API_CONFIG } from '@/config/api.js'
     
     .news-title {
       font-size: 16px;
-    }
-    
-    .pagination {
-      flex-wrap: wrap;
-      gap: 5px;
-    }
-    
-    .pagination a {
-      padding: 8px 15px;
-      font-size: 13px;
-    }
-    
-    .page-numbers a {
-      min-width: 35px;
-      padding: 8px 12px;
     }
   }
   </style>

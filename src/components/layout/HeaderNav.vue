@@ -44,29 +44,33 @@
     <!-- 移动端头部导航 -->
     <section class="m_header_box">
       <header id="m_header">
-        <!-- <div id="logo">
-          <a href="#" style="display: inline;color: #ffffff;">华苏建设有限公司</router-link>
-        </div> -->
         <div class="mobile-menu" @click="toggleMobileMenu"></div>
       </header>
     </section>
     
-    <!-- 移动端菜单 -->
+    <!-- 移动端菜单（扁平分组） -->
     <div id="m_nav" :class="{ act: showMobileMenu }">
-      <ul>
-        <li v-for="item in navItems" :key="item.id" class="void">
-          <router-link :to="item.href">{{ item.title }}</router-link>
-          <ul class="sub" v-if="item.children">
-            <li v-for="child in item.children" :key="child.id">
-              <router-link :to="child.href">{{ child.title }}</router-link>
+      <button type="button" class="close-btn" aria-label="关闭菜单" @click="closeMobileMenu">×</button>
+      <ul class="m-nav-list">
+        <li v-for="group in mobileNavGroups" :key="group.id" class="m-nav-group">
+          <div class="m-nav-group-title">{{ group.title }}</div>
+          <ul class="m-nav-links">
+            <li v-for="(link, idx) in group.links" :key="idx">
+              <router-link :to="link.href" class="m-nav-link" @click="closeMobileMenu">
+                {{ link.title }}
+              </router-link>
             </li>
           </ul>
         </li>
       </ul>
     </div>
-    
-    <!-- 移动端菜单遮罩 -->
-    <!-- <div class="nav_mask" v-if="showMobileMenu" @click="closeMobileMenu"></div> -->
+
+    <div
+      v-show="showMobileMenu"
+      class="nav_mask"
+      aria-hidden="true"
+      @click="closeMobileMenu"
+    />
     
     <!-- 全屏菜单组件 -->
     <!-- <MenuComponent v-if="showMenu" :isVisible="showMenu" @close="closeMenu" /> -->
@@ -186,6 +190,27 @@ export default {
       ]
     }
   },
+  computed: {
+    mobileNavGroups() {
+      return this.navItems.map((item) => {
+        if (item.children && item.children.length) {
+          return {
+            id: item.id,
+            title: item.title,
+            links: item.children.map((c) => ({
+              title: c.title,
+              href: c.href
+            }))
+          }
+        }
+        return {
+          id: item.id,
+          title: item.title,
+          links: [{ title: item.title, href: item.href }]
+        }
+      })
+    }
+  },
   methods: {
     goToHome() {
       // 如果当前已经在首页，直接重新加载页面
@@ -214,22 +239,19 @@ export default {
     // 添加移动端菜单方法
     toggleMobileMenu() {
       this.showMobileMenu = !this.showMobileMenu
-      // 防止body滚动
+      const btn = document.querySelector('.mobile-menu')
       if (this.showMobileMenu) {
         document.body.classList.add('navShow')
-        // 添加 active 类到移动菜单按钮
-        document.querySelector('.mobile-menu').classList.add('active')
+        btn?.classList.add('active')
       } else {
         document.body.classList.remove('navShow')
-        // 移除 active 类
-        document.querySelector('.mobile-menu').classList.remove('active')
+        btn?.classList.remove('active')
       }
     },
     closeMobileMenu() {
       this.showMobileMenu = false
       document.body.classList.remove('navShow')
-      // 移除 active 类
-      document.querySelector('.mobile-menu').classList.remove('active')
+      document.querySelector('.mobile-menu')?.classList.remove('active')
     }
   }
 }
@@ -263,225 +285,58 @@ export default {
   right: 0;
 }
 
-#m_nav ul {
+.m-nav-list {
   list-style: none;
-  padding: 0px 0 200px 0;
+  padding: 72px 0 120px 0;
   margin: 0;
 }
 
-/* 增强移动菜单悬停效果 */
-#m_nav .void {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  position: relative;
-  overflow: hidden;
+.m-nav-group {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding-bottom: 0.12rem;
+  margin-bottom: 0.12rem;
 }
 
-#m_nav .void::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(135, 206, 235, 0.1), transparent);
-  transition: left 0.6s ease;
-  z-index: 0;
+.m-nav-group-title {
+  padding: 0.12rem 0.2rem 0.08rem;
+  font-size: 0.15rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.02em;
 }
 
-#m_nav .void:hover::before {
-  left: 100%;
-}
-
-#m_nav .void > a {
-  display: block;
-  padding: 10px 0px;
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 15px;
-  font-weight: 500;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  z-index: 1;
-  transform: translateX(0);
-}
-
-#m_nav .void > a::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 4px;
-  height: 100%;
-  background: linear-gradient(180deg, #87ceeb 0%, #5dade2 100%);
-  transform: scaleY(0);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 0 10px rgba(135, 206, 235, 0.3);
-}
-
-#m_nav .void > a::after {
-  content: '→';
-  position: absolute;
-  right: 30px;
-  top: 50%;
-  transform: translateY(-50%) scale(0);
-  color: #87ceeb;
-  font-size: 14px;
-  opacity: 0;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  text-shadow: 0 0 5px rgba(135, 206, 235, 0.5);
-}
-
-#m_nav .void > a:hover {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  color: #2c3e50;
-  padding-left: 35px;
-  transform: translateX(5px);
-  box-shadow: inset 0 0 20px rgba(135, 206, 235, 0.1);
-}
-
-#m_nav .void > a:hover::before {
-  transform: scaleY(1);
-  box-shadow: 0 0 15px rgba(135, 206, 235, 0.4);
-}
-
-#m_nav .void > a:hover::after {
-  opacity: 1;
-  right: 25px;
-  transform: translateY(-50%) scale(1);
-}
-
-/* 子菜单悬停效果增强 */
-#m_nav .sub {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+.m-nav-links {
+  list-style: none;
   padding: 0;
   margin: 0;
-  border-left: 3px solid #e3f2fd;
-  position: relative;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
   overflow: hidden;
 }
 
-#m_nav .sub::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 100%;
-  background: linear-gradient(180deg, #87ceeb 0%, #5dade2 100%);
-  transform: scaleY(0);
-  transition: transform 0.3s ease;
-  transform-origin: top;
+.m-nav-links li {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-#m_nav .void:hover .sub::before {
-  transform: scaleY(1);
-}
-
-#m_nav .sub li {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  position: relative;
-  transition: all 0.3s ease;
-}
-
-#m_nav .sub li:last-child {
+.m-nav-links li:last-child {
   border-bottom: none;
 }
 
-#m_nav .sub li:hover {
-  background: rgba(135, 206, 235, 0.05);
-  transform: translateX(3px);
+.m-nav-link {
+  display: block;
+  padding: 0.14rem 0.2rem;
+  font-size: 0.14rem;
+  color: rgba(255, 255, 255, 0.92);
+  text-decoration: none;
+  min-height: 44px;
+  box-sizing: border-box;
+  line-height: 1.4;
 }
 
-#m_nav .sub a {
-  padding: 14px 30px 14px 30px;
-  font-size: 13px;
-  color: #666666;
-  border-left: none;
-  font-weight: 400;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  z-index: 1;
-}
-
-#m_nav .sub a::before {
-  content: '•';
-  position: absolute;
-  left: 35px;
-  color: #87ceeb;
-  font-size: 12px;
-  opacity: 0;
-  transform: scale(0) rotate(0deg);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  text-shadow: 0 0 5px rgba(135, 206, 235, 0.5);
-}
-
-#m_nav .sub a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 0;
-  height: 100%;
-  background: linear-gradient(90deg, rgba(135, 206, 235, 0.1), transparent);
-  transition: width 0.3s ease;
-}
-
-#m_nav .sub a:hover {
-  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-  color: #1976d2;
-  padding-left: 55px;
-  transform: translateX(5px);
-  box-shadow: inset 0 0 15px rgba(135, 206, 235, 0.1);
-}
-
-#m_nav .sub a:hover::before {
-  opacity: 1;
-  transform: scale(1.2) rotate(360deg);
-  color: #1976d2;
-}
-
-#m_nav .sub a:hover::after {
-  width: 100%;
-}
-
-/* 添加菜单项进入动画 */
-#m_nav .void {
-  animation: slideInFromRight 0.3s ease forwards;
-  opacity: 0;
-  transform: translateX(30px);
-}
-
-#m_nav .void:nth-child(1) { animation-delay: 0.1s; }
-#m_nav .void:nth-child(2) { animation-delay: 0.15s; }
-#m_nav .void:nth-child(3) { animation-delay: 0.2s; }
-#m_nav .void:nth-child(4) { animation-delay: 0.25s; }
-#m_nav .void:nth-child(5) { animation-delay: 0.3s; }
-#m_nav .void:nth-child(6) { animation-delay: 0.35s; }
-
-@keyframes slideInFromRight {
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* 子菜单项进入动画 */
-#m_nav .sub li {
-  animation: slideInFromLeft 0.3s ease forwards;
-  opacity: 0;
-  transform: translateX(-20px);
-}
-
-#m_nav .sub li:nth-child(1) { animation-delay: 0.1s; }
-#m_nav .sub li:nth-child(2) { animation-delay: 0.15s; }
-#m_nav .sub li:nth-child(3) { animation-delay: 0.2s; }
-#m_nav .sub li:nth-child(4) { animation-delay: 0.25s; }
-
-@keyframes slideInFromLeft {
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+.m-nav-link.router-link-active,
+.m-nav-link:active {
+  background: rgba(135, 206, 235, 0.2);
+  color: #fff;
 }
 
 /* 菜单头部 */

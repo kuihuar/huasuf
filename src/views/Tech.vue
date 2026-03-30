@@ -43,9 +43,9 @@
           <img src="/src/assets/images/m_n_nav_left.svg" />
         </a>
         <h1>{{ getCurrentTitle() }}</h1>
-        <div id="bnt_sub_nav" class="iconfont" @click="toggleMobileNav">
+        <!-- <div id="bnt_sub_nav" class="iconfont" @click="toggleMobileNav">
           <img src="/src/assets/images/m_n_nav_right.svg" />
-        </div>
+        </div> -->
       </div>
       <div id="sub_nav_content" :class="{ show: showMobileNav }">
         <dl>

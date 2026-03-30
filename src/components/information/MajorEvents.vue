@@ -35,47 +35,13 @@
                         </li>
                     </ul>
                     
-                    <!-- 分页 -->
-                    <div v-if="!loading && !error && total > pageSize" class="pagebar">
-                        <span class="p_pages">
-                            <span 
-                                :class="['p_first', currentPage === 1 ? 'p_fun_d' : 'p_fun']"
-                                @click="goToPage(1)"
-                            >
-                                首页
-                            </span>
-                            <span 
-                                :class="['p_prev', currentPage === 1 ? 'p_fun_d' : 'p_fun']"
-                                @click="goToPage(currentPage - 1)"
-                            >
-                                上页
-                            </span>
-                            
-                            <!-- 页码 -->
-                            <span 
-                                v-for="page in visiblePages" 
-                                :key="page"
-                                :class="['p_no', page === currentPage ? 'p_no_d' : '']"
-                                @click="goToPage(page)"
-                            >
-                                {{ page }}
-                            </span>
-                            
-                            <span 
-                                :class="['p_next', currentPage === totalPages ? 'p_fun_d' : 'p_fun']"
-                                @click="goToPage(currentPage + 1)"
-                            >
-                                下页
-                            </span>
-                            <span 
-                                :class="['p_last', currentPage === totalPages ? 'p_fun_d' : 'p_fun']"
-                                @click="goToPage(totalPages)"
-                            >
-                                尾页
-                            </span>
-                        </span>
-                        <span class="p_t">共{{ total }}条</span>
-                    </div>
+                    <PageBar
+                        v-if="!loading && !error && total > pageSize"
+                        :current-page="currentPage"
+                        :total-pages="totalPages"
+                        :total-count="total"
+                        @change="goToPage"
+                    />
                 </div>
             </div>
         </section>
@@ -84,9 +50,11 @@
 
 <script>
 import { getNoticeList } from '@/api/notice.js'
+import PageBar from '@/components/common/PageBar.vue'
 
 export default {
     name: 'MajorEvents',
+    components: { PageBar },
     data() {
         return {
             notices: [],
@@ -100,16 +68,6 @@ export default {
     computed: {
         totalPages() {
             return Math.ceil(this.total / this.pageSize)
-        },
-        visiblePages() {
-            const pages = []
-            const start = Math.max(1, this.currentPage - 2)
-            const end = Math.min(this.totalPages, this.currentPage + 2)
-            
-            for (let i = start; i <= end; i++) {
-                pages.push(i)
-            }
-            return pages
         }
     },
     mounted() {
@@ -204,29 +162,6 @@ export default {
     color: #999;
 }
 
-.p_pages span {
-    cursor: pointer;
-    user-select: none;
-}
-
-.p_fun {
-    cursor: pointer;
-}
-
-.p_fun_d {
-    cursor: not-allowed;
-    color: #ccc;
-}
-
-.p_no {
-    cursor: pointer;
-}
-
-.p_no_d {
-    background-color: #007bff;
-    color: white;
-}
-
 /* 保持原有样式 */
 .list20 li {
     border-bottom: 1px solid #eee;
@@ -265,28 +200,4 @@ export default {
     line-height: 1.4;
 }
 
-.pagebar {
-    margin-top: 30px;
-    text-align: center;
-}
-
-.p_pages {
-    display: inline-block;
-    margin-right: 20px;
-}
-
-.p_pages span {
-    display: inline-block;
-    padding: 8px 12px;
-    margin: 0 2px;
-    border: 1px solid #ddd;
-    text-decoration: none;
-    color: #333;
-    border-radius: 4px;
-}
-
-.p_t {
-    color: #666;
-    font-size: 14px;
-}
 </style>

@@ -39,11 +39,11 @@
           <img src="/src/assets/images/m_n_nav_left.svg" />
         </a>
         <h1>{{ getCurrentTitle() }}</h1>
-        <div id="bnt_sub_nav" class="iconfont" @click="toggleMobileNav">
+        <!-- <div id="bnt_sub_nav" class="iconfont" @click="toggleMobileNav">
           <img src="/src/assets/images/m_n_nav_right.svg" />
-        </div>
+        </div> -->
       </div>
-      <div id="sub_nav_content" :class="{ show: showMobileNav }">
+      <!-- <div id="sub_nav_content" :class="{ show: showMobileNav }">
         <dl>
           <dt :class="{ on: currentTab === 'about' }">
             <router-link to="/company/about" title="集团简介">集团简介</router-link>
@@ -55,7 +55,7 @@
             <router-link to="/company/contact" title="联系华苏">联系华苏</router-link>
           </dt>
         </dl>
-      </div>
+      </div> -->
     </section>
     <div class="clear"></div>
 
