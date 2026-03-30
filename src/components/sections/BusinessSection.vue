@@ -19,14 +19,14 @@
       </div>
       <div class="right">
         <div class="tit2">
-          <div class="t1">三大支柱</div>
-          <div class="t2">全产业链服务</div>
+          <!-- <div class="t1">三大支柱</div> -->
+          <!-- <div class="t2">全产业链服务</div> -->
         </div>
       </div>
     </div>
 
     <!-- 六大支撑 -->
-    <section class="zhicheng home3_tit home3_tit6">
+    <!-- <section class="zhicheng home3_tit home3_tit6">
       <div class="img slow img_zd">
         <div class="img_hezi" :style="{ background: `url(${sixSupports.bgImage})` }"></div>
         <img :src="sixSupports.bgImage" class="none" />
@@ -35,9 +35,9 @@
         <h3>六大支撑</h3>
         <div class="arr"></div>
       </div>
-    </section>
+    </section> -->
 
-    <section class="zhicheng_box" :class="{ active: showZhicheng }">
+    <!-- <section class="zhicheng_box" :class="{ active: showZhicheng }">
       <section class="zhicheng home3_tit home3_tit3" @click="toggleZhicheng">
         <div class="img slow img_zd">
           <div class="img_hezi" :style="{ background: `url(${threePillars[0].image})` }"></div>
@@ -86,7 +86,7 @@
           </ul>
         </div>
       </div>
-    </section>
+    </section> -->
   </section>
 </template>
 
