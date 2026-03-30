@@ -1,0 +1,10 @@
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+#gotop {
+  bottom: max(0.32rem, env(safe-area-inset-bottom, 0px));
+  right: max(0.1rem, env(safe-area-inset-right, 0px));
+}

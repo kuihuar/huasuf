@@ -43,6 +43,10 @@ import ProjectShowcase from '../components/common/ProjectShowcase.vue'
 // import TopicSection from '../components/sections/TopicSection.vue'
 import FooterSection from '../components/layout/FooterSection.vue'
 import fullpage from 'fullpage.js'
+import {
+  layoutIsDesktop,
+  createDesktopLayoutMatcher
+} from '@/config/breakpoints.js'
 
 export default {
   name: 'HomePage',
@@ -63,24 +67,31 @@ export default {
       isInitialized: false,
       initRetryCount: 0,
       maxRetries: 3,
-      isRouteReady: false
+      isRouteReady: false,
+      _initTimer: null,
+      _desktopMq: null,
+      _onDesktopMqChange: null
     }
   },
   mounted() {
     console.log('HomePage mounted, current hash:', window.location.hash)
+    this.setupLayoutListener()
     this.initializePage()
   },
   beforeDestroy() {
+    this.clearInitTimer()
+    this.teardownLayoutListener()
     this.destroyFullpage()
   },
   activated() {
-    // 处理keep-alive组件激活
     console.log('HomePage activated')
+    this.setupLayoutListener()
     this.initializePage()
   },
   deactivated() {
-    // 处理keep-alive组件停用
     console.log('HomePage deactivated')
+    this.clearInitTimer()
+    this.teardownLayoutListener()
     this.destroyFullpage()
   },
   watch: {
@@ -95,36 +106,56 @@ export default {
     }
   },
   methods: {
+    clearInitTimer() {
+      if (this._initTimer != null) {
+        clearTimeout(this._initTimer)
+        this._initTimer = null
+      }
+    },
+    setupLayoutListener() {
+      if (typeof window === 'undefined' || this._desktopMq) return
+      this._desktopMq = createDesktopLayoutMatcher()
+      this._onDesktopMqChange = () => this.onDesktopLayoutChange()
+      if (this._desktopMq.addEventListener) {
+        this._desktopMq.addEventListener('change', this._onDesktopMqChange)
+      } else {
+        this._desktopMq.addListener(this._onDesktopMqChange)
+      }
+    },
+    teardownLayoutListener() {
+      if (!this._desktopMq || !this._onDesktopMqChange) return
+      if (this._desktopMq.removeEventListener) {
+        this._desktopMq.removeEventListener('change', this._onDesktopMqChange)
+      } else {
+        this._desktopMq.removeListener(this._onDesktopMqChange)
+      }
+      this._desktopMq = null
+      this._onDesktopMqChange = null
+    },
+    onDesktopLayoutChange() {
+      if (this._desktopMq.matches) {
+        this.$nextTick(() => this.initFullpage())
+      } else {
+        this.destroyFullpage()
+      }
+    },
     async initializePage() {
       console.log('Initializing page, hash:', window.location.hash)
-      
-      // 确保DOM完全渲染
+      this.clearInitTimer()
       await this.$nextTick()
-      
-      // 检查是否是直接访问 #/ 的情况
       const hash = window.location.hash
       const isDirectHashAccess = hash === '#/' || hash === '#'
-      
-      if (isDirectHashAccess) {
-        console.log('Direct hash access detected, using longer delay')
-        // 直接访问 #/ 时使用更长的延迟
-        setTimeout(() => {
-          this.initFullpage()
-        }, 1000)
-      } else {
-        // 正常路由跳转使用较短延迟
-        setTimeout(() => {
-          this.initFullpage()
-        }, 500)
-      }
+      const delay = isDirectHashAccess ? 1000 : 500
+      this._initTimer = setTimeout(() => {
+        this._initTimer = null
+        this.initFullpage()
+      }, delay)
     },
     initFullpage() {
       console.log('Attempting to initialize fullpage.js...')
       console.log('Current hash:', window.location.hash)
       console.log('Current pathname:', window.location.pathname)
-      
-      // 检查屏幕宽度
-      if (window.innerWidth < 1200) {
+      if (!layoutIsDesktop()) {
         console.log('Screen width too small for fullpage.js')
         return
       }
@@ -285,16 +316,18 @@ export default {
 <style scoped>
 .home-page {
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
 }
 
 #fullpage {
   height: 100vh;
+  height: 100dvh;
 }
 
-/* 确保每个section占满屏幕 */
 #fullpage .fp-section {
   height: 100vh !important;
+  height: 100dvh !important;
 }
 
 /* 返回顶部按钮 */
@@ -329,19 +362,19 @@ export default {
   font-size: 1.2rem;
 }
 
-/* 响应式设计 */
-@media (max-width: 1200px) {
+@media (max-width: 1199px) {
   .home-page {
     height: auto;
   }
-  
+
   #fullpage {
     height: auto;
   }
-  
+
   #fullpage .fp-section {
     height: auto !important;
     min-height: 100vh;
+    min-height: 100dvh;
   }
 }
 </style>

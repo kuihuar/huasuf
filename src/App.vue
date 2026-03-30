@@ -39,6 +39,7 @@ html, body, #app {
 @media (max-width: 1199px) {
   .home-page {
     min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
   }

@@ -339,12 +339,12 @@ export default {
 /* 轮播图样式 - 修复响应式问题 */
 .main-visual-slider {
   position: relative;
-  height: 100vh; /* 桌面端全屏高度 */
+  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
 }
 
-/* 移动端响应式调整 */
-@media (max-width: 1200px) {
+@media (max-width: 1199px) {
   .main-visual-slider {
     height: 60vw !important; /* 移动端使用vw单位 */
     min-height: 300px; /* 最小高度保证 */

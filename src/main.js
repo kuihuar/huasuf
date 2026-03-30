@@ -4,6 +4,7 @@ import router from './router'
 
 // CSS imports
 import './assets/css/reset.css'
+import './assets/css/responsive-base.css'
 import './assets/css/animate.css'
 import './assets/css/style.css'
 import './assets/css/page.css'
@@ -26,11 +27,14 @@ function initializeAOS() {
   return new Promise((resolve) => {
     // 检查 AOS 是否已经加载
     if (window.AOS) {
+      const reduceMotion =
+        window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches
       window.AOS.init({
         duration: 10000,
         once: true,
         offset: 100,
-        disable: false
+        disable: reduceMotion
       })
       console.log('AOS initialized successfully')
       resolve(true)
@@ -42,11 +46,14 @@ function initializeAOS() {
     script.src = './src/assets/js/animate.js'
     script.onload = () => {
       if (window.AOS) {
+        const reduceMotion =
+          window.matchMedia &&
+          window.matchMedia('(prefers-reduced-motion: reduce)').matches
         window.AOS.init({
           duration: 1000,
           once: true,
           offset: 100,
-          disable: false
+          disable: reduceMotion
         })
         console.log('AOS initialized successfully')
         resolve(true)

@@ -28,7 +28,13 @@
                 <div class="img_hezi"
                   :style="{ background: `url(${news.image})` }">
                 </div>
-                <img :src="news.image" :alt="news.title" class="none" />
+                <img
+                  :src="news.image"
+                  :alt="news.title"
+                  class="none"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </a>
           </li>
@@ -431,5 +437,32 @@ export default {
 .p_t {
   margin-left: 1rem;
   color: #666;
+}
+
+@media (max-width: 768px) {
+  .list21 li .a {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .list21 li .a .img {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-top: 0.2rem;
+  }
+}
+
+.pagebar .p_first,
+.pagebar .p_prev,
+.pagebar .p_next,
+.pagebar .p_last,
+.pagebar .p_no,
+.pagebar .p_no_d {
+  min-height: 44px;
+  min-width: 44px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

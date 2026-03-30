@@ -685,7 +685,7 @@ section.index #m_header {
 }
 
 /* 移动端显示 */
-@media (max-width: 1200px) {
+@media (max-width: 1199px) {
   .nav_box {
     display: none !important;
   }
@@ -700,7 +700,7 @@ section.index #m_header {
 }
 
 /* 桌面端隐藏 */
-@media (min-width: 1201px) {
+@media (min-width: 1200px) {
   .nav_box {
     display: block !important;
   }

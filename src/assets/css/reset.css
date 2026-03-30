@@ -3235,7 +3235,7 @@ table,
 	max-width: 94%;
 }
 
-@media(max-width: 1200px) {
+@media(max-width: 1199px) {
 	.wp {
 		padding: 0 15px;
 		width: 100%;
@@ -3416,7 +3416,7 @@ table,
 
 @media(min-width: 1200px) {}
 
-@media(max-width: 1200px) {}
+@media(max-width: 1199px) {}
 
 @media(max-width: 992px) {}
 
